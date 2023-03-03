@@ -227,11 +227,12 @@ if (!function_exists('hello_elementor_body_open')) {
 		}
 	}
 }
+
+
 function my_theme_enqueue_scripts()
 {
-	global $post;
 	// charge les fichiers seulement si le shortcode est utilisé sur la page
-	if (has_shortcode($post->post_content, 'simple_map')) {
+	if (has_shortcode(get_post()->post_content, 'simple_map')) {
 		wp_enqueue_style('simple_map-css', get_stylesheet_directory_uri() . '/assets/css/map.css');
 		//wp_enqueue_script('simple_map-js', get_stylesheet_directory_uri() . '/assets/js/map.js', 1.0, true);
 	}
@@ -257,7 +258,7 @@ function shortcode_map_tiersLieux()
 	
 	let iconCedille = L.icon({
 		iconUrl: "wp-content/themes/hello-elementor/assets/images/markerC.png",
-		iconSize: [80, 82]
+		iconSize: [65, 67]
 	  });
 	  
 	
@@ -269,7 +270,8 @@ function shortcode_map_tiersLieux()
 	
 	let markers = [];
 	
-	fetch("wp-content/themes/hello-elementor/data.geojson")
+	//fetch("wp-content/themes/hello-elementor/data.geojson")
+	fetch("wp-content/themes/hello-elementor/assets/geojson/data.geojson")
 	  .then(response => response.text())
 	  .then(data => {
 		const parsedData = JSON.parse(data); //parse data en JSON
@@ -324,13 +326,11 @@ function shortcode_map_tiersLieux()
 
 		  markers.push(marker)
 		}
-		console.log(markers)
 	
 		//Création du filtre L.Control
 		let filter = L.control({ position: "topright" }); //Create L;control with position on map
 		filter.onAdd = function (map) {
 		  let form = document.getElementById("filter-form"); //catch form
-		  console.log(form);
 		  //Add radio all in the filterController
 		  form.innerHTML += `
 			<input type="radio" id="all" name="type" value="all" checked>
@@ -378,6 +378,57 @@ function shortcode_map_tiersLieux()
 }
 
 add_shortcode('simple_map', 'shortcode_map_tiersLieux');
+
+/* function shortcode_list_events_openagenda()
+{
+	$response = wp_safe_remote_get('https://api.openagenda.com/v2/agendas/{60004897}/events?key={6debd66784b441a680c4353748d8675e}');
+	if (!is_wp_error($response) && is_array($response)) :
+		$data = json_decode((wp_remote_retrieve_body($response)), true);
+		if (isset($data['events']) && !empty($data['events'])) :
+			$events = $data['events'];
+			$output = '<ul>';
+			foreach ($events as $event) :
+				$output .= '<li><a href="' . $event['url'] . '">' . $event['title'] . '</a></li>';
+			endforeach;
+			$output .= '</ul>';
+			return $output;
+		endif;
+	endif;
+/* 	return '<script>
+	fetch(\'https://api.openagenda.com/v2/agendas/{60004897}/events?key={6debd66784b441a680c4353748d8675e}\')
+    .then(response => response.text())
+    .then(data => {
+        const parsedData = JSON.parse(data); //parse data en JSON
+        console.log(parsedData)
+    })
+    .catch(error => console.error(error));	
+	</script>'; 
+}
+add_shortcode('openagenda_events', 'shortcode_list_events_openagenda'); */
+
+/* function openagenda_events() {
+    $api_key = '6debd66784b441a680c4353748d8675e';
+    $agenda_id = '60004897';
+
+    $url = "https://api.openagenda.com/v1/agendas/$agenda_id/events?key=$api_key";
+    $response = wp_remote_request( $url );
+    $body = wp_remote_retrieve_body( $response );
+    $data = json_decode( $body );
+
+    $events = $data->data;
+
+    $output = '<ul>';
+    foreach ( $events as $event ) {
+        $output .= '<li>';
+        $output .= '<a href="' . $event->url . '">' . $event->title . '</a>';
+        $output .= '</li>';
+    }
+    $output .= '</ul>';
+
+    return $output;
+}
+add_shortcode( 'openagenda', 'openagenda_events' ); */
+
 
 /* 
 	

@@ -1,0 +1,125 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": {
+          "long": 4.915308955851341,
+          "lat": 44.93500825524385
+        }
+      },
+      "properties": {
+        "nom": "La Ruche",
+        "adresse": "18 Avenue du Maréchal de Lattre de Tassigny, 26000 Valence",
+        "services": [
+          "coworking",
+          "événements",
+          "formation"
+        ],
+        "contact": {
+          "mail": "contact@la-ruche.net",
+          "telephone": "04 75 78 51 48",
+          "site_internet": "https://la-ruche.net/"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": {
+          "long": 4.910436469342724,
+          "lat": 44.919139121935686
+        }
+      }, 
+      "properties": {
+        "nom": "La Cantine",
+        "adresse": "4 Rue Georges Courteline, 26000 Valence",
+        "services": [
+          "coworking",
+          "café",
+          "ateliers"
+        ],
+        "contact": {
+          "mail": "contact@lacantine-valence.net",
+          "telephone": "04 75 81 09 72",
+          "site_internet": "https://lacantine-valence.net/"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": {
+          "long": 4.760833353988529,
+          "lat": 44.542780167156444
+        } 
+      },
+      "properties": {
+        "nom": "La Belle Équipe",
+        "adresse": "5 Rue Jean-Baptiste Dumay, 26200 Montélimar",
+        "services": [
+          "coworking",
+          "café",
+          "ateliers"
+        ],
+        "contact": {
+          "mail": "contact@labelleequipe.coop",
+          "telephone": "04 75 46 20 25",
+          "site_internet": "https://labelleequipe.coop/"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": {
+          "long": 4.974820967492134,
+          "lat": 44.987674281026294
+        }
+      },
+      "properties": {
+        "nom": "Le Moulin Digital",
+        "adresse": "8, avenue de la gare, 26300 Alixan",
+        "services": [
+          "coworking",
+          "formation",
+          "incubation"
+        ],
+        "contact": {
+          "mail": "contact@moulindigital.com",
+          "telephone": "04 69 96 09 26",
+          "site_internet": "https://moulindigital.com/"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": {
+          "long": 4.699274727000463,
+          "lat": 44.37557256459933
+        }
+      },
+      "properties": {
+        "nom": "La Forge Collective",
+        "adresse": "2 Rue de la Gare, 26700 Pierrelatte",
+        "services": [
+          "coworking",
+          "fablab",
+          "ateliers"
+        ],
+        "contact": {
+          "mail": "contact@laforgecollective.com",
+          "telephone": "06 42 62 14 28",
+          "site_internet": "https://laforgecollective.com/"
+        }
+      }
+    }
+  ]
+}
