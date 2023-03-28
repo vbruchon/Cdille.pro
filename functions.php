@@ -229,6 +229,33 @@ if (!function_exists('hello_elementor_body_open')) {
 }
 
 
+
+
+
+
+
+
+function my_save_json_data() {
+    $url = 'http://cedille.ftalps.fr/wp-content/themes/hello-elementor/geojson/data.js';
+    $file_path = get_stylesheet_directory() . '/geojson/myNewData.json'; 
+
+    // Récupération des données depuis l'URL
+    $data = file_get_contents($url);
+
+    // Décodage des données JSON
+    $json_data = json_decode($data, true);
+
+    // Enregistrement des données dans un fichier JSON
+    file_put_contents($file_path, json_encode($json_data));
+    
+    echo "file save"; 
+}
+
+// Exécution de la fonction lors de l'activation du thème ou du plugin
+add_action( 'init', 'my_save_json_data' );
+
+
+
 function my_theme_enqueue_scripts()
 {
 	// charge les fichiers seulement si le shortcode est utilisé sur la page
@@ -236,10 +263,99 @@ function my_theme_enqueue_scripts()
 		wp_enqueue_style('simple_map-css', get_stylesheet_directory_uri() . '/assets/css/map.css');
 		//wp_enqueue_script('simple_map-js', get_stylesheet_directory_uri() . '/assets/js/map.js', 1.0, true);
 	}
+
+	if (has_shortcode(get_post()->post_content, 'openagenda_events_list')) {
+		wp_enqueue_script('openagenda_events_list-js', get_stylesheet_directory_uri() . '/assets/js/openAgenda.js', 1.0, true);
+	}
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 
+//MAP WITH NEW DATA LADROME 
+/* function shortcode_map_tiersLieux()
+{
+	return '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+	integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+	crossorigin=""></script>
+	
+	<div id="map"></div>
 
+	<script>
+
+		//Création de map, icon, tileLayer
+	let mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+	const map = L.map("map").setView([44.7241, 5.0864], 9);
+	
+	let iconCedille = L.icon({
+		iconUrl: "wp-content/themes/hello-elementor/assets/images/markerC.png",
+		iconSize: [65, 67]
+	  });
+	  
+	
+	L.tileLayer(mapUrl, {
+	  maxZoom: 19,
+	  attribution: "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>"
+	}).addTo(map);
+	//_________________________________________________________________________________________________________
+	
+	let markers = [];
+
+	//fetch("wp-content/themes/hello-elementor/data.geojson")
+	fetch("wp-content/themes/hello-elementor/assets/geojson/med_num.json")
+	  .then(response => response.json())
+	  .then(data => {
+		console.log("Data : " + data);
+		const parsedData = data; //parse data en JSON
+		console.log("parsedData : " + parsedData);
+
+		for (let tiersLieux of parsedData.features) {
+			let content = {
+				"lat": tiersLieux.geometry.coordinates[1],
+				"long": tiersLieux.geometry.coordinates[0],
+				"name": tiersLieux.properties.nom,
+				"adress": tiersLieux.properties.adresse,
+				"mail": tiersLieux.properties.email,
+				"phone": tiersLieux.properties.tel,
+				"website": tiersLieux.properties.url
+			  };
+
+			  //create the content of Popup
+		  	let popupContent = `
+				  <div class="name">${content.name}</div>
+				  <div class="adress">${content.adress}</div>
+				  <div class="mail">
+					<a href="mailto: ${content.mail}">Mail : ${content.mail}</a>
+				  </div>
+				  <div class="phone">
+					<a href="tel: ${content.phone}">N° tél : ${content.phone}</a>
+				  </div>
+				  <div class="website">
+					<a href="${content.website}">Site internet : ${content.website}</a>
+				  </div>
+				`;
+		  //Ajout du marker à la map + ajout d\'une popup au clique sur le marker
+		  let marker = L.marker([content.lat, content.long], { icon: iconCedille }).addTo(map);
+		  marker.bindPopup(popupContent);
+
+		  markers.push(marker)
+		}
+
+
+	  })
+	  .catch(error => console.error(error));
+	</script>';
+}
+
+add_shortcode('simple_map', 'shortcode_map_tiersLieux'); */
+
+function openagenda_events()
+{
+	return `<div id="events">
+	</div>`;
+}
+add_shortcode('openagenda_events_list', 'openagenda_events');
+
+//MAP WITH MY GEOJSON DATA
 function shortcode_map_tiersLieux()
 {
 	return '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
@@ -270,16 +386,15 @@ function shortcode_map_tiersLieux()
 	
 	let markers = [];
 	
-	//fetch("wp-content/themes/hello-elementor/data.geojson")
-	fetch("wp-content/themes/hello-elementor/assets/geojson/data.geojson")
+
+	fetch("wp-content/themes/hello-elementor/geojson/myNewData.json")
 	  .then(response => response.text())
 	  .then(data => {
 		const parsedData = JSON.parse(data); //parse data en JSON
 	
 	
 		let serviceController = {}; //Array of services (unique)
-	
-		//Pour chaque TL dans ParsedData.features
+	//Pour chaque TL dans ParsedData.features
 		for (let tiersLieux of parsedData.features) {
 		  //content = object contenant le contenu d\'un tiers-Lieux à chaque fois
 		  let content = {
@@ -292,6 +407,7 @@ function shortcode_map_tiersLieux()
 			"phone": tiersLieux.properties.contact.telephone,
 			"website": tiersLieux.properties.contact.site_internet
 		  };
+		
 	
 		  //TRnasformer le content.services[] en une liste à puce
 		  let servicesList = "Services proposés : <ul>";
@@ -376,61 +492,145 @@ function shortcode_map_tiersLieux()
 	  .catch(error => console.error(error));
 	</script>';
 }
-
 add_shortcode('simple_map', 'shortcode_map_tiersLieux');
 
-/* function shortcode_list_events_openagenda()
-{
-	$response = wp_safe_remote_get('https://api.openagenda.com/v2/agendas/{60004897}/events?key={6debd66784b441a680c4353748d8675e}');
-	if (!is_wp_error($response) && is_array($response)) :
-		$data = json_decode((wp_remote_retrieve_body($response)), true);
-		if (isset($data['events']) && !empty($data['events'])) :
-			$events = $data['events'];
-			$output = '<ul>';
-			foreach ($events as $event) :
-				$output .= '<li><a href="' . $event['url'] . '">' . $event['title'] . '</a></li>';
-			endforeach;
-			$output .= '</ul>';
-			return $output;
-		endif;
-	endif;
-/* 	return '<script>
-	fetch(\'https://api.openagenda.com/v2/agendas/{60004897}/events?key={6debd66784b441a680c4353748d8675e}\')
-    .then(response => response.text())
-    .then(data => {
-        const parsedData = JSON.parse(data); //parse data en JSON
-        console.log(parsedData)
-    })
-    .catch(error => console.error(error));	
-	</script>'; 
-}
-add_shortcode('openagenda_events', 'shortcode_list_events_openagenda'); */
-
-/* function openagenda_events() {
-    $api_key = '6debd66784b441a680c4353748d8675e';
-    $agenda_id = '60004897';
-
-    $url = "https://api.openagenda.com/v1/agendas/$agenda_id/events?key=$api_key";
-    $response = wp_remote_request( $url );
-    $body = wp_remote_retrieve_body( $response );
-    $data = json_decode( $body );
-
-    $events = $data->data;
-
-    $output = '<ul>';
-    foreach ( $events as $event ) {
-        $output .= '<li>';
-        $output .= '<a href="' . $event->url . '">' . $event->title . '</a>';
-        $output .= '</li>';
-    }
-    $output .= '</ul>';
-
-    return $output;
-}
-add_shortcode( 'openagenda', 'openagenda_events' ); */
+/* const parsedData = JSON.parse(data); //parse data en JSON
+		console.log("data : " + data)
+	console.log("parsedData : " + parsedData);
+	console.log("features : " + parseData.features)
+	
+		let serviceController = {}; //Array of services (unique)
+	
+		//Pour chaque TL dans ParsedData.features
+		for (let tiersLieux of data) {
+		  //content = object contenant le contenu d\'un tiers-Lieux à chaque fois
+		  let content = {
+			"lat": tiersLieux.geometry.coordinates[1],
+			"long": tiersLieux.geometry.coordinates[0],
+			"name": tiersLieux.properties.nom,
+			"adress": tiersLieux.properties.adresse,
+			"services": tiersLieux.properties.services,
+			"mail": tiersLieux.properties.contact.mail,
+			"phone": tiersLieux.properties.contact.telephone,
+			"website": tiersLieux.properties.contact.site_internet
+		  };
 
 
-/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		  //TRnasformer le content.services[] en une liste à puce
+		  let servicesList = "Services proposés : <ul>";
+	
+		  for (let service of content.services) {
+			if (!(service in serviceController)) {
+			  serviceController[service] = true;
+			}
+			servicesList += "<li>" + service + "</li>";
+		  }
+		  servicesList += "</ul>";
+	
+	
+		  //create the content of Popup
+		  let popupContent = `
+				  <div class="name">${content.name}</div>
+				  <div class="adress">${content.adress}</div>
+				  <div class="services">${servicesList}</div>
+				  <div class="mail">
+					<a href="mailto: ${content.mail}">Mail : ${content.mail}</a>
+				  </div>
+				  <div class="phone">
+					<a href="tel: ${content.phone}">N° tél : ${content.phone}</a>
+				  </div>
+				  <div class="website">
+					<a href="${content.website}">Site internet : ${content.website}</a>
+				  </div>
+				`;
+		  //Ajout du marker à la map + ajout d\'une popup au clique sur le marker
+		  let marker = L.marker([content.lat, content.long], { icon: iconCedille }).addTo(map);
+		  marker.bindPopup(popupContent);
+
+		  markers.push(marker)
+		}
 	
 
-	 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//Création du filtre L.Control
+		let filter = L.control({ position: "topright" }); //Create L;control with position on map
+		filter.onAdd = function (map) {
+		  let form = document.getElementById("filter-form"); //catch form
+		  //Add radio all in the filterController
+		  form.innerHTML += `
+			<input type="radio" id="all" name="type" value="all" checked>
+			<label for="all">Tous les Tiers-Lieux</label><br>
+		  `;
+	
+		  //Loop for add service in the filtercontroller
+		  for (let service in serviceController) {
+			form.innerHTML += `
+			  <input type="radio" id="${service}" name="type" value="${service}">
+			  <label for="${service}">${service}</label><br>
+			`;
+		  }
+			L.DomEvent.on(form, "change", function (e) {
+				let radios = form.elements.type;
+				let selectedType;
+				let filteredMarkers = [];
+			  
+				for (let radio of radios) {
+				  if (radio.checked) {
+					selectedType = radio.value;
+					break;
+				  }
+				}
+				if (selectedType === "all") {
+					markers.forEach(function (marker) {
+					  marker.addTo(map);
+					});
+				  } else {
+					markers.forEach(function (marker) {
+					  if (marker.getPopup().getContent().indexOf(selectedType) >= 0) {
+						marker.addTo(map);
+					  } else {
+						marker.removeFrom(map);
+					  }
+					});
+				  }
+		  });
+		  return form;
+		};
+		filter.addTo(map) */
