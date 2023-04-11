@@ -1,0 +1,54 @@
+#map {
+    height: 800px;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.leaflet-popup-content-wrapper {
+    background: rgb(221, 204, 177) !important;
+    width: 110%;
+}
+
+.leaflet-popup-content{
+    width: 265px;
+}
+
+.leaflet-popup-content *{
+
+    margin-bottom: 15px;
+}
+
+.name{
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    color: rgb(255, 102, 27);
+}
+
+.adress, .services{
+    font-size: 16px;
+    width: 120%;
+}
+
+.mail, .phone, .website{
+    width: 120%;
+}
+
+.mail a, .phone a, .website a{
+    color: rgb(186, 34, 83) !important;
+    font-size: 15px;
+    font-weight: 501;
+    width: 120%;
+    text-decoration: none;
+}
+
+#filter-form{
+    background: rgba(221, 204, 177,0.75);
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 130%;
+}
+
+#filter-form input{
+    margin-bottom: 10px;
+}
