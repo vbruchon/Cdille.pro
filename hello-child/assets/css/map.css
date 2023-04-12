@@ -34,6 +34,9 @@
     display: flex;
 }
 
+.active{
+    border:  solid 2px red;
+}
 
 .facebook img, .instagram img, .twitter img, .linkedin img{
     width: 35%;

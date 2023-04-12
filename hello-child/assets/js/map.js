@@ -14,84 +14,17 @@ L.tileLayer(mapUrl, {
 }).addTo(map);
 
 let markers = [];
+let list = document.getElementById("list");
+let form = document.getElementById("filter-form");
 
-//_________________________________________________________________________________________________________
+
 fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
     .then(response => response.text())
     .then(data => {
         const parsedData = JSON.parse(data); //parse data en JSON
 
-
-
-
-        /* 
-        
-        else {
-            markers.forEach(function (marker) {
-                if (marker.getPopup().getContent().indexOf(selectedType) >= 0) {
-                    marker.addTo(map);
-                } else {
-                    marker.removeFrom(map);
-                }
-            });
-        }
-    })
-  L.DomEvent.on(form, "change", function (e) {
-    let radios = form.elements.type;
-    let selectedType;
-    let filteredMarkers = [];
-
-    for (let radio of radios) {
-        if (radio.checked) {
-            selectedType = radio.value;
-            break;
-        }
-    }
-    if (selectedType === "all") {
-        markers.forEach(function (marker) {
-            marker.addTo(map);
-        });
-    } else {
-        markers.forEach(function (marker) {
-            if (marker.getPopup().getContent().indexOf(selectedType) >= 0) {
-                marker.addTo(map);
-            } else {
-                marker.removeFrom(map);
-            }
-        });
-    }
-});
-return form;
-};
-filter.addTo(map)
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //LISTE
-        let list = document.getElementById("list");
-
-        //MAP
-        let serviceController = {}; //Array of services (unique)
-        //Pour chaque TL dans ParsedData.features
         for (let tiersLieux of parsedData.features) {
-            //content = object contenant le contenu d\'un tiers-Lieux à chaque fois
+            //content = object contains the tiers-lieux's content
             let content = {
                 "lat": tiersLieux.geometry.coordinates[1],
                 "long": tiersLieux.geometry.coordinates[0],
@@ -116,36 +49,35 @@ filter.addTo(map)
                 "accessibility": tiersLieux.properties.complement_info.accessibilite,
             };
 
-            //create the content of Popup
+            //Create the content of Popup
             let popupContent = `<div class="name">${content.name}</div>`;
 
-            //Ajout du marker à la map + ajout d\'une popup au clique sur le marker
+            //Add marker to the map and add bindPopup
             let marker = L.marker([content.lat, content.long], { icon: iconCedille }).addTo(map);
             marker.bindPopup(popupContent);
-
+            //Add marker in markers array 
             markers.push(marker);
 
 
-            createElementList(content, map, marker, list);
+            let item = createElementCard(content, map, marker)
+            list.appendChild(item);
         }
-        //Barre de filtre 
-        let form = document.getElementById("filter-form"); //catch form
-        //Add radio all in the filterController
-        form.innerHTML += `
-            <input type="radio" id="all" name="type" value="all" checked>
-            <label for="all">Tous les Tiers-Lieux</label><br>
 
-            <input type="radio" id="5" name="type" value="5">
-            <label for="five">5 Tiers-Lieux</label><br>
+        //Create form
+        form.innerHTML += ` <input type="radio" id="all" name="type" value="all" checked>
+                            <label for="all">Tous les Tiers-Lieux</label><br>
 
-            <input type="radio" id="2" name="type" value="2">
-            <label for="two">2 Tiers-Lieux</label><br>
-          `;
+                            <input type="radio" id="5" name="type" value="5">
+                            <label for="five">5 Tiers-Lieux</label><br>
 
+                            <input type="radio" id="2" name="type" value="2">
+                            <label for="two">2 Tiers-Lieux</label><br>
+        `;
 
         form.addEventListener("change", (e) => {
             let radios = form.elements.type;
             let selectedType;
+            let numSelected;
 
             for (let radio of radios) {
                 if (radio.checked) {
@@ -154,30 +86,61 @@ filter.addTo(map)
                 }
             }
 
+            // Determines the number of markers to display based on the selected value
             if (selectedType === "all") {
-                // Afficher tous les marqueurs
-                markers.forEach(function (marker) {
-                    marker.addTo(map);
-                });
+                numSelected = markers.length;
             } else {
-                // Afficher seulement 5 marqueurs
-                for (let i = 0; i < selectedType; i++) {
-                    markers[i].addTo(map);
-                }
+                numSelected = parseInt(selectedType);
+            }
 
-                // Retirer les autres marqueurs
-                for (let i = selectedType; i < markers.length; i++) {
-                    markers[i].removeFrom(map);
+            // Browse all markers and add or remove from the map incording to the value of numSelected
+            markers.forEach((marker, index) => {
+                if (index < numSelected) {
+                    marker.addTo(map);
+                } else {
+                    marker.removeFrom(map);
+                }
+            });
+
+            // Display elements of the list incording to markers display 
+            const listItems = list.querySelectorAll(".list-item");
+
+            for (let i = 0; i < listItems.length; i++) {
+                if (i < numSelected) {
+                    listItems[i].style.display = "block";
+                } else {
+                    listItems[i].style.display = "none";
                 }
             }
         });
 
+        // Catch all .card
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove active classe at all other cards 
+                cards.forEach(otherCard => {
+                    if (otherCard !== card && otherCard.classList.contains('active')) {
+                        otherCard.classList.remove('active');
+                    }
+                });
+                // Add active classe at current card
+                card.classList.add('active');
+            });
+        });
     })
     .catch(error => console.error(error));
 
-function createElementList(content, map, marker, list) {
-    let carte = document.createElement("div");
-    carte.classList.add("carte");
+
+
+
+
+
+
+function createElementCard(content, map, marker) {
+    let card = document.createElement("div");
+    card.classList.add("card");
 
 
     let fields = {
@@ -192,13 +155,15 @@ function createElementList(content, map, marker, list) {
     };
 
     for (let key in fields) {
-        carte.appendChild(fields[key]);
+        card.appendChild(fields[key]);
     }
 
-    carte.addEventListener("click", () => {
+    card.addEventListener("click", () => {
+        marker.openPopup();
         map.setView(marker.getLatLng(), 9);
     });
-    list.appendChild(carte)
+
+    return card;
 }
 
 
@@ -348,7 +313,6 @@ function createAccessibilityElement(content) {
 
     return accessibility;
 }
-
 /* //Création du filtre L.Control
     let filter = L.control({ position: "topright" }); 
     filter.onAdd = function (map) {
