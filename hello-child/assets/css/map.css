@@ -4,6 +4,47 @@
     border-radius: 30px;
 }
 
+.carte{
+    transition: transform 0.3s ;
+}
+
+.carte:hover{
+    border: solid 1px black;
+}
+.name {
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(255, 102, 27);
+}
+
+.adress {
+    display: flex;
+}
+
+.street, .code, .city{
+    margin-right: 2%;
+}
+
+.tel, .email, .web-site{
+    display: inline-block;
+    margin-right: 5%;
+}
+
+.social-media{
+    display: flex;
+}
+
+
+.facebook img, .instagram img, .twitter img, .linkedin img{
+    width: 35%;
+}
+
+/* #map {
+    height: 800px;
+    width: 100%;
+    border-radius: 30px;
+}
+
 .leaflet-popup-content-wrapper {
     background: rgb(221, 204, 177) !important;
     width: 110%;
@@ -21,7 +62,7 @@
 .name{
     font-weight: bold;
     font-size: 25px;
-    text-align: center;
+    /*text-align: center;
     color: rgb(255, 102, 27);
 }
 
@@ -51,4 +92,4 @@
 
 #filter-form input{
     margin-bottom: 10px;
-}
+} */

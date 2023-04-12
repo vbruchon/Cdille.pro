@@ -37,10 +37,9 @@ function shortcode_map_tiersLieux()
     $list_div = '<div id="list"></div>';
 	$map_div = '<div id="map"></div>';
 	$form_div = '<form id="filter-form"></form>';
-
-    $content = '<div id ="content">'. $list_div . $map_div . '</div>';
+    
 
 	// Retourner le contenu généré
-	return $content;
+	return $map_div . $form_div . $list_div;
 }
 add_shortcode('simple_map', 'shortcode_map_tiersLieux');

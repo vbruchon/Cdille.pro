@@ -21,6 +21,69 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
     .then(data => {
         const parsedData = JSON.parse(data); //parse data en JSON
 
+
+
+
+        /* 
+        
+        else {
+            markers.forEach(function (marker) {
+                if (marker.getPopup().getContent().indexOf(selectedType) >= 0) {
+                    marker.addTo(map);
+                } else {
+                    marker.removeFrom(map);
+                }
+            });
+        }
+    })
+  L.DomEvent.on(form, "change", function (e) {
+    let radios = form.elements.type;
+    let selectedType;
+    let filteredMarkers = [];
+
+    for (let radio of radios) {
+        if (radio.checked) {
+            selectedType = radio.value;
+            break;
+        }
+    }
+    if (selectedType === "all") {
+        markers.forEach(function (marker) {
+            marker.addTo(map);
+        });
+    } else {
+        markers.forEach(function (marker) {
+            if (marker.getPopup().getContent().indexOf(selectedType) >= 0) {
+                marker.addTo(map);
+            } else {
+                marker.removeFrom(map);
+            }
+        });
+    }
+});
+return form;
+};
+filter.addTo(map)
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //LISTE
         let list = document.getElementById("list");
 
@@ -44,15 +107,14 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
                     "webSite": tiersLieux.properties.coordonees.site_internet,
                 },
                 "socialMedia": {
-                    "fb": tiersLieux.properties.communication.reseau_social_1,
-                    "insta": tiersLieux.properties.communication.reseau_social_2,
-                    "linkedin": tiersLieux.properties.communication.reseau_social_3,
-                    "twitter": tiersLieux.properties.communication.reseau_social_4,
+                    "url1": tiersLieux.properties.communication.reseau_social_1,
+                    "url2": tiersLieux.properties.communication.reseau_social_2,
+                    "url3": tiersLieux.properties.communication.reseau_social_3,
+                    "url4": tiersLieux.properties.communication.reseau_social_4,
                 },
                 "desc": tiersLieux.properties.complement_info.descriptif_court,
                 "accessibility": tiersLieux.properties.complement_info.accessibilite,
             };
-
 
             //create the content of Popup
             let popupContent = `<div class="name">${content.name}</div>`;
@@ -65,14 +127,57 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
 
 
             createElementList(content, map, marker, list);
-
         }
+        //Barre de filtre 
+        let form = document.getElementById("filter-form"); //catch form
+        //Add radio all in the filterController
+        form.innerHTML += `
+            <input type="radio" id="all" name="type" value="all" checked>
+            <label for="all">Tous les Tiers-Lieux</label><br>
+
+            <input type="radio" id="5" name="type" value="5">
+            <label for="five">5 Tiers-Lieux</label><br>
+
+            <input type="radio" id="2" name="type" value="2">
+            <label for="two">2 Tiers-Lieux</label><br>
+          `;
+
+
+        form.addEventListener("change", (e) => {
+            let radios = form.elements.type;
+            let selectedType;
+
+            for (let radio of radios) {
+                if (radio.checked) {
+                    selectedType = radio.value;
+                    break;
+                }
+            }
+
+            if (selectedType === "all") {
+                // Afficher tous les marqueurs
+                markers.forEach(function (marker) {
+                    marker.addTo(map);
+                });
+            } else {
+                // Afficher seulement 5 marqueurs
+                for (let i = 0; i < selectedType; i++) {
+                    markers[i].addTo(map);
+                }
+
+                // Retirer les autres marqueurs
+                for (let i = selectedType; i < markers.length; i++) {
+                    markers[i].removeFrom(map);
+                }
+            }
+        });
+
     })
     .catch(error => console.error(error));
 
 function createElementList(content, map, marker, list) {
-    let newDiv = document.createElement("div");
-    newDiv.classList.add("carte");
+    let carte = document.createElement("div");
+    carte.classList.add("carte");
 
 
     let fields = {
@@ -87,12 +192,13 @@ function createElementList(content, map, marker, list) {
     };
 
     for (let key in fields) {
-        fields[key].addEventListener("click", () => {
-            map.setView(marker.getLatLng(), 9);
-        });
-        list.appendChild(fields[key]);
+        carte.appendChild(fields[key]);
     }
 
+    carte.addEventListener("click", () => {
+        map.setView(marker.getLatLng(), 9);
+    });
+    list.appendChild(carte)
 }
 
 
@@ -118,22 +224,28 @@ function createAdressElement(content) {
     street.classList.add("street");
     let streetText = document.createElement("p");
     streetText.innerHTML = content.adress.street;
+    street.appendChild(streetText);
 
     let code = document.createElement("div");
     code.classList.add("code");
     let codeText = document.createElement("p");
     codeText.innerHTML = content.adress.code;
+    code.appendChild(codeText);
 
     let city = document.createElement("div");
     city.classList.add("city");
     let cityText = document.createElement("p");
     cityText.innerHTML = content.adress.city;
+    city.appendChild(cityText);
 
 
-    adress.appendChild(street, code, city);
+    adress.appendChild(street);
+    adress.appendChild(code)
+    adress.appendChild(city)
 
     return adress;
 }
+
 //TEL
 function createTelElement(content) {
     let divTel = document.createElement("div");
@@ -172,58 +284,42 @@ function createWebSiteElement(content) {
     return webSite;
 }
 
-//ADRESS
+//SocialMedia
 function createSocialMediaElement(content) {
     let socialMedia = document.createElement("div");
     socialMedia.classList.add("social-media");
 
+    let urlSocialMedia = [content.socialMedia.url1, content.socialMedia.url2, content.socialMedia.url3, content.socialMedia.url4];
+    console.log(urlSocialMedia);
 
-    if (content.fb !== "") {
-        let facebook = document.createElement("div");
-        facebook.classList.add("fb");
+    let imgSocialMedia = {
+        "facebook": "wp-content/themes/hello-child/assets/images/facebook.png",
+        "instagram": "wp-content/themes/hello-child/assets/images/instagram.png",
+        "twitter": "wp-content/themes/hello-child/assets/images/twitter.png",
+        "linkedin": "wp-content/themes/hello-child/assets/images/linkedin.png"
+    };
 
-        let facebookText = document.createElement("p");
-        facebookText.innerHTML = content.socialMedia.fb;
-        facebook.appendChild(facebookText);
+    for (let i = 0; i < urlSocialMedia.length; i++) {
+        if (urlSocialMedia[i] !== "") {
+            let url = new URL(urlSocialMedia[i]);
+            let domain = url.hostname.replace("www.", "").replace(".com", "");
 
-        socialMedia.appendChild(facebook);
+            for (let key in imgSocialMedia) {
+                if (domain === key) {
+                    let img = document.createElement("img");
+                    img.src = imgSocialMedia[key];
+
+                    let link = document.createElement("a");
+                    link.href = urlSocialMedia[i];
+                    link.classList.add(key);
+
+
+                    link.appendChild(img);
+                    socialMedia.appendChild(link);
+                }
+            }
+        }
     }
-
-    if (content.insta !== "") {
-        let insta = document.createElement("div");
-        insta.classList.add("insta");
-
-        let instaText = document.createElement("p");
-        instaText.innerHTML = content.socialMedia.insta;
-        insta.appendChild(instaText);
-
-        socialMedia.appendChild(insta);
-    }
-
-    if (content.linkedin !== "") {
-        //Create div.tweeter
-        let linkedin = document.createElement("div");
-        linkedin.classList.add("linkedin");
-        //Create p 
-        let linkedinText = document.createElement("p");
-        linkedinText.innerHTML = content.socialMedia.linkedin;
-        linkedin.appendChild(linkedinText);
-
-        socialMedia.appendChild(linkedin);
-    }
-
-    if (content.twitter !== "") {
-        //Create div.tweeter
-        let twiter = document.createElement("div");
-        twiter.classList.add("twitter");
-        //Create p 
-        let twiterText = document.createElement("p");
-        twiterText.innerHTML = content.socialMedia.twitter;
-        twiter.appendChild(twiterText);
-
-        socialMedia.appendChild(twiter);
-    }
-
     return socialMedia;
 }
 
@@ -240,7 +336,7 @@ function createDescElement(content) {
     return desc;
 }
 
-//Eccessibilité
+//Accessibility
 function createAccessibilityElement(content) {
     let accessibility = document.createElement("div");
     accessibility.classList.add("accessibility");
@@ -253,23 +349,6 @@ function createAccessibilityElement(content) {
     return accessibility;
 }
 
-/* 
-nom_long V
-adresse   V
-code_postal   V
-commune  V
-mail V
-telephone V
-reseau_social_1 v
-reseau_social_2 v 
-reseau_social_3 v
-reseau_social_4 v
-reseau_social_5 v
-descriptif_court
-accessibilite
-
-
-*/
 /* //Création du filtre L.Control
     let filter = L.control({ position: "topright" }); 
     filter.onAdd = function (map) {
@@ -315,3 +394,12 @@ accessibilite
         return form;
     };
     filter.addTo(map) */
+
+
+
+/* let carte = document.querySelectorAll(".carte");
+for (let i = 0; i < carte.length; i++) {
+carte[i].addEventListener("click", () => {
+    map.setView(marker.getLatLng(), 12);
+});
+}*/

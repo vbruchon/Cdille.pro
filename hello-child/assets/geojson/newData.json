@@ -33,9 +33,9 @@
                 },
                 "communication": {
                     "reseau_social_1": "https://www.facebook.com/cowork",
-                    "reseau_social_2": "",
-                    "reseau_social_3": "",
-                    "reseau_social_4": "",
+                    "reseau_social_2": "https://www.linkedin.com/ctest",
+                    "reseau_social_3": "https://www.twitter.com/cowork",
+                    "reseau_social_4": "https://www.instagram.com/cowork",
                     "reseau_social_5": "",
                     "photo_url": "https://www.cowork.com/photos/cowork-lyon.jpg",
                     "credit_photo": "John Doe",
