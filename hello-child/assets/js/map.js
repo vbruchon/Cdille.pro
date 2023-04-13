@@ -1,3 +1,4 @@
+
 //Création de map, icon, tileLayer
 let mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const map = L.map("map").setView([44.7241, 5.0864], 9);
@@ -13,8 +14,13 @@ L.tileLayer(mapUrl, {
     attribution: "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>"
 }).addTo(map);
 
+
+// Create feature group for all markers
+let allMarkersGroup = L.featureGroup().addTo(map);
+// Create feature group for filtered markers
+let filteredMarkersGroup = L.featureGroup().addTo(map);
+
 let markers = [];
-let mapy = document.getElementById("map");
 let list = document.getElementById("list");
 let form = document.getElementById("filter-form");
 
@@ -23,6 +29,9 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
     .then(response => response.text())
     .then(data => {
         const parsedData = JSON.parse(data); //parse data en JSON
+
+        //Create a ClusterGroup to group markers
+        let markerClusterGroup = L.markerClusterGroup();
 
         for (let tiersLieux of parsedData.features) {
             //content = object contains the tiers-lieux's content
@@ -53,39 +62,40 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
             //Create the content of Popup
             let popupContent = `<div class="name">${content.name}</div>`;
 
-            //Add marker to the map and add bindPopup
-            let marker = L.marker([content.lat, content.long], { icon: iconCedille }).addTo(map);
+            //Create marker with lat and long; add custom icon and add popup
+            let marker = L.marker([content.lat, content.long], { icon: iconCedille });
             marker.bindPopup(popupContent);
+
+            //Add marker to markerClusterGroup
+            markerClusterGroup.addLayer(marker);
             //Add marker in markers array 
             markers.push(marker);
+
+            /*            //Add marker to the map and add bindPopup
+                       let marker = L.marker([content.lat, content.long], { icon: iconCedille }).addTo(map);
+                       marker.bindPopup(popupContent);
+                       //Add marker in markers array 
+                       markers.push(marker); */
 
 
             let item = createElementCard(content, map, marker)
             list.appendChild(item);
         }
-        // Create feature group for all markers
-        let allMarkersGroup = L.featureGroup().addTo(map);
+        map.fitBounds(markerClusterGroup.getBounds());
 
-        // Add all markers in group
-        markers.forEach(function (marker) {
-            allMarkersGroup.addLayer(marker);
-        });
-
-        // Create feature group for filtered markers
-        let filteredMarkersGroup = L.featureGroup().addTo(map);
-
+        map.addLayer(markerClusterGroup);
         //Create form
         form.innerHTML += ` <input type="radio" id="all" name="type" value="all" checked>
-                        <label for="all">Tous les Tiers-Lieux</label><br>
+                            <label for="all">Tous les Tiers-Lieux</label><br>
 
-                    <input type="radio" id="5" name="type" value="5">
-                        <label for="five">5 Tiers-Lieux</label><br>
+                            <input type="radio" id="5" name="type" value="5">
+                            <label for="five">5 Tiers-Lieux</label><br>
 
-                    <input type="radio" id="2" name="type" value="2">
-                        <label for="two">2 Tiers-Lieux</label><br>
-`;
+                            <input type="radio" id="2" name="type" value="2">
+                            <label for="two">2 Tiers-Lieux</label><br>
+        `;
 
-        form.addEventListener("change", () => {
+        form.addEventListener("change", (e) => {
             let radios = form.elements.type;
             let selectedType;
             let numSelected;
@@ -101,15 +111,14 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
             if (selectedType === "all") {
                 numSelected = markers.length;
 
-                // Add all markers to the allMarkersGroup
-                markers.forEach(function (marker) {
+                markers.forEach((marker) => {
                     allMarkersGroup.addLayer(marker);
-                });
-
-                // Remove all markers from the filteredMarkersGroup
-                filteredMarkersGroup.clearLayers();
+                })
+                filteredMarkersGroup = allMarkersGroup;
             } else {
                 numSelected = parseInt(selectedType);
+
+                filteredMarkersGroup.clearLayers();
 
                 // Add filtered markers to the filteredMarkersGroup
                 for (var i = 0; i < numSelected; i++) {
@@ -123,11 +132,18 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
                     }
                 });
             }
-
             // Centering on the boundaries of the filtered markers
             map.fitBounds(filteredMarkersGroup.getBounds());
 
 
+            // Browse all markers and add or remove from the map incording to the value of numSelected
+            markers.forEach((marker, index) => {
+                if (index < numSelected) {
+                    marker.addTo(map);
+                } else {
+                    marker.removeFrom(map);
+                }
+            });
 
 
             // Display elements of the list incording to markers display 
@@ -193,8 +209,6 @@ function createElementCard(content, map, marker) {
 
     return card;
 }
-
-
 
 //NAME
 function createNameElement(content) {
@@ -341,3 +355,4 @@ function createAccessibilityElement(content) {
 
     return accessibility;
 }
+
