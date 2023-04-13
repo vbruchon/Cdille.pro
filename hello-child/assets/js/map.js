@@ -14,6 +14,7 @@ L.tileLayer(mapUrl, {
 }).addTo(map);
 
 let markers = [];
+let mapy = document.getElementById("map");
 let list = document.getElementById("list");
 let form = document.getElementById("filter-form");
 
@@ -62,19 +63,29 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
             let item = createElementCard(content, map, marker)
             list.appendChild(item);
         }
+        // Create feature group for all markers
+        let allMarkersGroup = L.featureGroup().addTo(map);
+
+        // Add all markers in group
+        markers.forEach(function (marker) {
+            allMarkersGroup.addLayer(marker);
+        });
+
+        // Create feature group for filtered markers
+        let filteredMarkersGroup = L.featureGroup().addTo(map);
 
         //Create form
         form.innerHTML += ` <input type="radio" id="all" name="type" value="all" checked>
-                            <label for="all">Tous les Tiers-Lieux</label><br>
+                        <label for="all">Tous les Tiers-Lieux</label><br>
 
-                            <input type="radio" id="5" name="type" value="5">
-                            <label for="five">5 Tiers-Lieux</label><br>
+                    <input type="radio" id="5" name="type" value="5">
+                        <label for="five">5 Tiers-Lieux</label><br>
 
-                            <input type="radio" id="2" name="type" value="2">
-                            <label for="two">2 Tiers-Lieux</label><br>
-        `;
+                    <input type="radio" id="2" name="type" value="2">
+                        <label for="two">2 Tiers-Lieux</label><br>
+`;
 
-        form.addEventListener("change", (e) => {
+        form.addEventListener("change", () => {
             let radios = form.elements.type;
             let selectedType;
             let numSelected;
@@ -89,21 +100,38 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
             // Determines the number of markers to display based on the selected value
             if (selectedType === "all") {
                 numSelected = markers.length;
+
+                // Add all markers to the allMarkersGroup
+                markers.forEach(function (marker) {
+                    allMarkersGroup.addLayer(marker);
+                });
+
+                // Remove all markers from the filteredMarkersGroup
+                filteredMarkersGroup.clearLayers();
             } else {
                 numSelected = parseInt(selectedType);
+
+                // Add filtered markers to the filteredMarkersGroup
+                for (var i = 0; i < numSelected; i++) {
+                    filteredMarkersGroup.addLayer(markers[i]);
+                }
+
+                // Remove unfiltered markers from the allMarkersGroup
+                markers.forEach(function (marker) {
+                    if (!filteredMarkersGroup.hasLayer(marker)) {
+                        allMarkersGroup.removeLayer(marker);
+                    }
+                });
             }
 
-            // Browse all markers and add or remove from the map incording to the value of numSelected
-            markers.forEach((marker, index) => {
-                if (index < numSelected) {
-                    marker.addTo(map);
-                } else {
-                    marker.removeFrom(map);
-                }
-            });
+            // Centering on the boundaries of the filtered markers
+            map.fitBounds(filteredMarkersGroup.getBounds());
+
+
+
 
             // Display elements of the list incording to markers display 
-            const listItems = list.querySelectorAll(".list-item");
+            const listItems = list.querySelectorAll(".card");
 
             for (let i = 0; i < listItems.length; i++) {
                 if (i < numSelected) {
@@ -313,57 +341,3 @@ function createAccessibilityElement(content) {
 
     return accessibility;
 }
-/* //Création du filtre L.Control
-    let filter = L.control({ position: "topright" }); 
-    filter.onAdd = function (map) {
-        let form = document.getElementById("filter-form"); //catch form
-        //Add radio all in the filterController
-        form.innerHTML += `
-            <input type="radio" id="all" name="type" value="all" checked>
-            <label for="all">Tous les Tiers-Lieux</label><br>
-          `;
-
-        //Loop for add service in the filtercontroller
-        for (let service in serviceController) {
-            form.innerHTML += `
-              <input type="radio" id="${service}" name="type" value="${service}">
-              <label for="${service}">${service}</label><br>
-            `;
-        }
-        L.DomEvent.on(form, "change", function (e) {
-            let radios = form.elements.type;
-            let selectedType;
-            let filteredMarkers = [];
-
-            for (let radio of radios) {
-                if (radio.checked) {
-                    selectedType = radio.value;
-                    break;
-                }
-            }
-            if (selectedType === "all") {
-                markers.forEach(function (marker) {
-                    marker.addTo(map);
-                });
-            } else {
-                markers.forEach(function (marker) {
-                    if (marker.getPopup().getContent().indexOf(selectedType) >= 0) {
-                        marker.addTo(map);
-                    } else {
-                        marker.removeFrom(map);
-                    }
-                });
-            }
-        });
-        return form;
-    };
-    filter.addTo(map) */
-
-
-
-/* let carte = document.querySelectorAll(".carte");
-for (let i = 0; i < carte.length; i++) {
-carte[i].addEventListener("click", () => {
-    map.setView(marker.getLatLng(), 12);
-});
-}*/

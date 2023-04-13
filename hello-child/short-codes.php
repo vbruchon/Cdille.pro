@@ -34,12 +34,12 @@ function shortcode_map_tiersLieux()
     wp_enqueue_style('map-css', get_stylesheet_directory_uri() . '/assets/css/map.css', array(), '1.0.0');
 
 	// Créer les div nécessaires
+	$content = '<div id="content"><div id="list"></div><div id="map"></div></div>';
     $list_div = '<div id="list"></div>';
 	$map_div = '<div id="map"></div>';
 	$form_div = '<form id="filter-form"></form>';
     
-
 	// Retourner le contenu généré
-	return $map_div . $form_div . $list_div;
+	return $form_div . $content ;
 }
 add_shortcode('simple_map', 'shortcode_map_tiersLieux');

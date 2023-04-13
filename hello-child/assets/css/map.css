@@ -1,16 +1,30 @@
+/* .elementor-section.elementor-section-boxed > .elementor-container{
+    max-width: 100% !important;
+}
+
+#content {
+    display: flex;
+    margin: 2% 5%;
+}
+
+#list{
+    width: 40%;
+}
+ */
 #map {
     height: 800px;
     width: 100%;
     border-radius: 30px;
 }
 
-.carte{
-    transition: transform 0.3s ;
+.carte {
+    transition: transform 0.3s;
 }
 
-.carte:hover{
+.carte:hover {
     border: solid 1px black;
 }
+
 .name {
     font-weight: bold;
     font-size: 25px;
@@ -21,26 +35,35 @@
     display: flex;
 }
 
-.street, .code, .city{
+.street,
+.code,
+.city {
     margin-right: 2%;
 }
 
-.tel, .email, .web-site{
+.tel,
+.email,
+.web-site {
     display: inline-block;
     margin-right: 5%;
 }
 
-.social-media{
+.social-media {
     display: flex;
 }
 
-.active{
-    border:  solid 2px red;
+.active {
+    border: solid 2px red;
 }
 
-.facebook img, .instagram img, .twitter img, .linkedin img{
+.facebook img,
+.instagram img,
+.twitter img,
+.linkedin img {
     width: 35%;
 }
+
+
 
 /* #map {
     height: 800px;
