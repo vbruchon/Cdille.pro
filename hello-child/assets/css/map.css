@@ -5,20 +5,35 @@
 #content {
     display: flex;
     margin: 2% 5%;
-}
+} */
 
 #list{
-    width: 40%;
+    width: 30%;
+    margin-right: 2%;
+    height : 800px;
+    overflow: scroll;
 }
- */
+
+#filter-form {
+    display: flex;
+    justify-content: center;
+}
+
+label {
+    margin: 2% 2% 2% 10px;
+}
+
 #map {
     height: 800px;
-    width: 100%;
+    width: 70%;
     border-radius: 30px;
 }
 
-.carte {
+.card {
     transition: transform 0.3s;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(0.25turn, rgba(255, 249, 34), rgba(255, 0, 128), rgba(56, 2, 155, 0));
+    border-image-slice: 1;
 }
 
 .carte:hover {
@@ -63,7 +78,9 @@
     width: 35%;
 }
 
-
+.hidden {
+    display: none;
+}
 
 /* #map {
     height: 800px;
