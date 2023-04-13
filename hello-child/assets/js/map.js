@@ -81,7 +81,7 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
             let item = createElementCard(content, map, marker)
             list.appendChild(item);
         }
-        map.fitBounds(markerClusterGroup.getBounds());
+        //map.fitBounds(markerClusterGroup.getBounds());
 
         map.addLayer(markerClusterGroup);
         //Create form
@@ -163,16 +163,39 @@ fetch("wp-content/themes/hello-child/assets/geojson/newData.json")
 
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                // Remove active classe at all other cards 
+                
+                let hiddenFields = {
+                    "tel": card.querySelector('.tel'),
+                    "email": card.querySelector('.email'),
+                    "webSite": card.querySelector('.web-site'),
+                    "social": card.querySelector('.social-media'),
+                    "accessibility": card.querySelector('accessibility')
+                }
+                // Check if clicked card is already active
+                const isActive = card.classList.contains('active');
+
+                // Remove active class from all other cards 
                 cards.forEach(otherCard => {
                     if (otherCard !== card && otherCard.classList.contains('active')) {
                         otherCard.classList.remove('active');
                     }
                 });
-                // Add active classe at current card
-                card.classList.add('active');
+
+                // Add or remove active class at clicked card
+                if (isActive) {
+                    card.classList.remove('active');
+                    for(let key in hiddenFields){
+                        hiddenFields[key].classList.add('hidden')
+                    }
+                } else {
+                    card.classList.add('active');
+                    for(let key in hiddenFields){
+                        hiddenFields[key].classList.remove('hidden')
+                    };
+                }
             });
         });
+
     })
     .catch(error => console.error(error));
 
@@ -205,6 +228,12 @@ function createElementCard(content, map, marker) {
     card.addEventListener("click", () => {
         marker.openPopup();
         map.setView(marker.getLatLng(), 9);
+
+/*         fields.tel.classList.remove("hidden");
+        fields.email.classList.remove("hidden");
+        fields.webSite.classList.remove("hidden");
+        fields.social.classList.remove("hidden");
+        fields.accessibility.classList.remove("hidden"); */
     });
 
     return card;
@@ -256,7 +285,7 @@ function createAdressElement(content) {
 //TEL
 function createTelElement(content) {
     let divTel = document.createElement("div");
-    divTel.classList.add("tel");
+    divTel.classList.add("tel", "hidden");
 
     let tel = document.createElement("p");
     tel.innerHTML = content.contact.tel;
@@ -268,7 +297,7 @@ function createTelElement(content) {
 //EMAIL
 function createEmailElement(content) {
     let divEmail = document.createElement("div");
-    divEmail.classList.add("email");
+    divEmail.classList.add("email", "hidden");
 
     let email = document.createElement("p");
     email.innerHTML = content.contact.email;
@@ -281,7 +310,7 @@ function createEmailElement(content) {
 //Website
 function createWebSiteElement(content) {
     let webSite = document.createElement("div");
-    webSite.classList.add("web-site");
+    webSite.classList.add("web-site", "hidden");
 
     let webSiteText = document.createElement("p");
     webSiteText.innerHTML = content.contact.webSite;
@@ -294,7 +323,7 @@ function createWebSiteElement(content) {
 //SocialMedia
 function createSocialMediaElement(content) {
     let socialMedia = document.createElement("div");
-    socialMedia.classList.add("social-media");
+    socialMedia.classList.add("social-media", "hidden");
 
     let urlSocialMedia = [content.socialMedia.url1, content.socialMedia.url2, content.socialMedia.url3, content.socialMedia.url4];
     console.log(urlSocialMedia);
@@ -346,7 +375,7 @@ function createDescElement(content) {
 //Accessibility
 function createAccessibilityElement(content) {
     let accessibility = document.createElement("div");
-    accessibility.classList.add("accessibility");
+    accessibility.classList.add("accessibility", "hidden");
 
     let accessibilityText = document.createElement("p");
     accessibilityText.innerHTML = content.accessibility;
