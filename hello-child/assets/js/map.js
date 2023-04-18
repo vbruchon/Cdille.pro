@@ -37,18 +37,75 @@ fetch("/wp-content/themes/hello-child/assets/geojson/newData.json")
         //Create a ClusterGroup to group markers
         let markerClusterGroup = L.markerClusterGroup();
 
+
+
+        if (window.innerWidth < 768) {
+            const buttonList = document.createElement('img');
+            buttonList.src = "/wp-content/themes/hello-child/assets/images/listIcone.png"
+            buttonList.classList.add("button-list");
+
+            const buttonMap = document.createElement('img');
+            buttonMap.src = "/wp-content/themes/hello-child/assets/images/map.png"
+            buttonMap.classList.add("button-map");
+
+            contentDiv.insertBefore(buttonMap, contentDiv.firstChild);
+            contentDiv.insertBefore(buttonList, buttonMap);
+
+
+
+            buttonList.addEventListener("click", () => {
+                mapDiv.style.display = "none";
+                list.style.display = "block";
+
+                buttonList.src = "/wp-content/themes/hello-child/assets/images/listIcone-selected.png";
+
+
+                buttonList.classList.add("button-active");
+                buttonMap.src = "/wp-content/themes/hello-child/assets/images/map.png"
+                buttonMap.classList.remove("button-active")
+            })
+
+
+
+
+
+
+
+            buttonMap.addEventListener("click", () => {
+                mapDiv.style.display = "block";
+                list.style.display = "none";
+
+                buttonList.classList.remove("button-active");
+
+
+
+
+
+                buttonMap.src = "/wp-content/themes/hello-child/assets/images/map-selected.png";
+                buttonList.src = "/wp-content/themes/hello-child/assets/images/listIcone.png"
+                buttonMap.classList.add('button-active')
+            })
+        }
+
+
+
         createForm(form, filteredMarkersGroup, allMarkersGroup, markers);
+
 
         createMapAndListElement(markers, markerClusterGroup, parsedData);
 
         map.fitBounds(markerClusterGroup.getBounds(), { minZoom: 9 });
+
         map.addLayer(markerClusterGroup);
 
 
         const cards = document.querySelectorAll('.card');
+
         cardsEvent(cards);
 
         fixMapLoadingBugs(map)
+
+
     })
     .catch(error => console.error(error));
 
