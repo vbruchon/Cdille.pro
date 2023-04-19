@@ -1,224 +1,105 @@
-
 //Création de map, icon, tileLayer
 let mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const map = L.map("map").setView([44.7241, 5.0864], 9);
-
-let iconCedille = L.icon({
-    iconUrl: "/wp-content/themes/hello-child/assets/images/markerC.png",
-    iconSize: [65, 67]
-});
-
-
-L.tileLayer(mapUrl, {
-    maxZoom: 19,
-    attribution: "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>"
-}).addTo(map);
+let iconCedille = L.icon({ iconUrl: "/wp-content/themes/hello-child/assets/images/markerC.png", iconSize: [65, 67] });
+L.tileLayer(mapUrl, { maxZoom: 19, attribution: "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>" }).addTo(map);
 
 
 // Create feature group for all markers
 let allMarkersGroup = L.featureGroup().addTo(map);
 // Create feature group for filtered markers
 let filteredMarkersGroup = L.featureGroup().addTo(map);
-
-
-
 let markers = [];
+
+//DOM ELEMENT
 let list = document.getElementById("list");
 let form = document.getElementById("filter-form");
 let contentDiv = document.getElementById("content-div");
 let mapDiv = document.getElementById("map");
 
-
+let buttonsCreated = false;
 
 fetch("/wp-content/themes/hello-child/assets/geojson/newData.json")
     .then(response => response.text())
     .then(data => {
         const parsedData = JSON.parse(data); //parse data en JSON
-        //Create a ClusterGroup to group markers
-        let markerClusterGroup = L.markerClusterGroup();
 
+        let markerClusterGroup = L.markerClusterGroup();//Create a ClusterGroup to group markers
 
+        createFilterBar(form, filteredMarkersGroup, allMarkersGroup, markers);
+        /*         window.addEventListener("resize", () => {
+                    if (window.innerWidth < 768) {
+                        createListAndMapButtons();
+                    }
+                }) */
 
-        if (window.innerWidth < 768) {
-            const buttonDiv = document.createElement('div');
-            buttonDiv.id = "button";
-            
-            const buttonList = document.createElement('button');
-            buttonList.classList.add("list-active");
-
-            const buttonMap = document.createElement('button');
-            buttonMap.classList.add("button-map");
-
-            buttonDiv.appendChild(buttonList);
-            buttonDiv.appendChild(buttonMap)
-            contentDiv.insertBefore(buttonDiv, contentDiv.firstChild);
-
-
-
-
-
-            buttonList.addEventListener("click", () => {
-                buttonList.classList.remove("button-list");
-                buttonList.classList.add("list-active")
-                list.style.display = "block";
-
-                mapDiv.style.display = "none";
-                buttonMap.classList.remove("map-active");
-                buttonMap.classList.add("button-map")
-            });
-
-
-            buttonMap.addEventListener("click", () => {
-                buttonMap.classList.remove("button-map")
-                buttonMap.classList.add("map-active")
-                mapDiv.style.display = "block";
-
-                list.style.display = "none";
-                buttonList.classList.remove("list-active")
-                buttonList.classList.add("button-list")
-            })
-        }
-
-
-
-        createForm(form, filteredMarkersGroup, allMarkersGroup, markers);
-
+        // appel initial pour vérifier la taille de l'écran
+        checkScreenSize();
 
         createMapAndListElement(markers, markerClusterGroup, parsedData);
 
+        //Center layer map with respect to the coordinate of all clusterGroups
         map.fitBounds(markerClusterGroup.getBounds(), { minZoom: 9 });
-
         map.addLayer(markerClusterGroup);
 
-
-        const cards = document.querySelectorAll('.card');
-
-        cardsEvent(cards);
+        cardsEvent(document.querySelectorAll('.card'));
 
         fixMapLoadingBugs(map)
 
-
+        // ajouter un écouteur pour vérifier la taille de l'écran lorsque l'utilisateur redimensionne la fenêtre
+        window.addEventListener("resize", checkScreenSize);
     })
     .catch(error => console.error(error));
 
-//Stratégie pour la gestion d'affichage sur mobile.
-/* 
-Vérifier si on est sur mobile
-Créer deux boutons list et map
-si je clique sur le bouton map il affiche la map
-sinon il affiche la list
-Par défaut list afficher
-Voir pour la gestion de liements des card aux markers 
-*/
 
-
-
-
-
-
-
-
-
-
-function fixMapLoadingBugs(map) {
-    setInterval(function () {
-        map.invalidateSize();
-    }, 100);
-}
-
-
-
-function cardsEvent(cards) {
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-
-            let hiddenFields = {
-                "tel": card.querySelector('.tel'),
-                "email": card.querySelector('.email'),
-                "webSite": card.querySelector('.web-site'),
-                "social": card.querySelector('.social-media'),
-                "accessibility": card.querySelector('accessibility')
-            }
-            // Check if clicked card is already active
-            const isActive = card.classList.contains('active');
-
-            // Remove active class from all other cards 
-            cards.forEach(otherCard => {
-                if (otherCard !== card && otherCard.classList.contains('active')) {
-                    otherCard.classList.remove('active');
-                }
-            });
-
-            // Add or remove active class at clicked card
-            if (isActive) {
-                card.classList.remove('active');
-                for (let key in hiddenFields) {
-                    hiddenFields[key].classList.add('hidden')
-                }
-            } else {
-                card.classList.add('active');
-                for (let key in hiddenFields) {
-                    hiddenFields[key].classList.remove('hidden')
-                };
-            }
-        });
-    });
-}
-
-
-
-
-function createMapAndListElement(markers, markerClusterGroup, parsedData) {
-    for (let tiersLieux of parsedData.features) {
-        //content = object contains the tiers-lieux's content
-        let content = {
-            "lat": tiersLieux.geometry.coordinates[1],
-            "long": tiersLieux.geometry.coordinates[0],
-            "name": tiersLieux.properties.identification.nom_long,
-            "adress": {
-                "street": tiersLieux.properties.coordonees.adresse,
-                "code": tiersLieux.properties.coordonees.code_postal,
-                "city": tiersLieux.properties.coordonees.commune,
-            },
-            "contact": {
-                "tel": tiersLieux.properties.coordonees.telephone,
-                "email": tiersLieux.properties.coordonees.mail,
-                "webSite": tiersLieux.properties.coordonees.site_internet,
-            },
-            "socialMedia": {
-                "url1": tiersLieux.properties.communication.reseau_social_1,
-                "url2": tiersLieux.properties.communication.reseau_social_2,
-                "url3": tiersLieux.properties.communication.reseau_social_3,
-                "url4": tiersLieux.properties.communication.reseau_social_4,
-            },
-            "desc": tiersLieux.properties.complement_info.descriptif_court,
-            "accessibility": tiersLieux.properties.complement_info.accessibilite,
-        };
-
-        //Create the content of Popup
-        let popupContent = `<div class="name">${content.name}</div>`;
-
-        //Create marker with lat and long; add custom icon and add popup
-        let marker = L.marker([content.lat, content.long], { icon: iconCedille });
-        marker.bindPopup(popupContent);
-
-        //Add marker to markerClusterGroup
-        markerClusterGroup.addLayer(marker);
-        //Add marker in markers array 
-        markers.push(marker);
-
-        let item = createElementCard(content, map, marker)
-        list.appendChild(item);
-        marker.addEventListener("click", () => {
-            item.classList.add("active");
-        });
+function checkScreenSize() {
+    if (window.innerWidth < 768 && !buttonsCreated) {
+        createListAndMapButtons();
+        buttonsCreated = true;
+    } else if (window.innerWidth >= 768 && buttonsCreated) {
+        removeListAndMapButtons();
+        buttonsCreated = false;
     }
 }
 
+function removeListAndMapButtons() {
+    return document.getElementById("button").remove()
+}
 
 
 
-function createForm(form, filteredMarkersGroup, allMarkersGroup, markers) {
+
+/**
+ * Creates an HTML element with the specified tag, id or class and content.
+ * @param {string} balise - The HTML tag of the element to create.
+ * @param {string} idOrClass - The identifier or the class of the element to create. 
+ * If the argument starts with a '#', the identifier will be used, otherwise the class will be used.
+ * @param {string} [content] - The textual content of the element. Optional.
+ * @param {string} [innerHtml] - The HTML content of the element. Optional.
+ * @returns {HTMLElement} The created HTML element.
+ */
+function createDomElement(balise, idOrClass = "", content = "", innerHtml = "") {
+    let domElement = document.createElement(balise);
+
+    if (idOrClass !== "") {
+        if (idOrClass[0] === "#") {
+            domElement.id = idOrClass.slice(1);
+        } else {
+            domElement.className = idOrClass;
+        }
+    }
+
+    if (content !== "") {
+        domElement.textContent = content;
+    }
+    if (innerHtml != "") {
+        domElement.innerHTML = innerHtml;
+    }
+
+    return domElement;
+}
+
+function createFilterBar(form, filteredMarkersGroup, allMarkersGroup, markers) {
     form.innerHTML += ` <input type="radio" id="all" name="type" value="all" checked>
                             <label for="all">Tous les Tiers-Lieux</label><br>
 
@@ -294,19 +175,92 @@ function createForm(form, filteredMarkersGroup, allMarkersGroup, markers) {
 
 }
 
+function createListAndMapButtons() {
+    const buttonDiv = createDomElement('div', "#button");
 
+    const buttonList = createDomElement('button', 'list-active');
+    const buttonMap = createDomElement('button', 'button-map');
 
+    buttonDiv.appendChild(buttonList);
+    buttonDiv.appendChild(buttonMap);
+    contentDiv.insertBefore(buttonDiv, contentDiv.firstChild);
 
+    buttonList.addEventListener("click", () => {
+        buttonList.classList.remove("button-list");
+        buttonList.classList.add("list-active");
+        list.style.display = "block";
+
+        mapDiv.style.display = "none";
+        buttonMap.classList.remove("map-active");
+        buttonMap.classList.add("button-map");
+    });
+
+    buttonMap.addEventListener("click", () => {
+        buttonMap.classList.remove("button-map");
+        buttonMap.classList.add("map-active");
+        mapDiv.style.display = "block";
+
+        list.style.display = "none";
+        buttonList.classList.remove("list-active");
+        buttonList.classList.add("button-list");
+    });
+}
+
+function createMapAndListElement(markers, markerClusterGroup, parsedData) {
+    for (let tiersLieux of parsedData.features) {
+        //content = object contains the tiers-lieux's content
+        let content = {
+            "lat": tiersLieux.geometry.coordinates[1],
+            "long": tiersLieux.geometry.coordinates[0],
+            "name": tiersLieux.properties.identification.nom_long,
+            "adress": {
+                "street": tiersLieux.properties.coordonees.adresse,
+                "code": tiersLieux.properties.coordonees.code_postal,
+                "city": tiersLieux.properties.coordonees.commune,
+            },
+            "contact": {
+                "tel": tiersLieux.properties.coordonees.telephone,
+                "email": tiersLieux.properties.coordonees.mail,
+                "webSite": tiersLieux.properties.coordonees.site_internet,
+            },
+            "socialMedia": {
+                "url1": tiersLieux.properties.communication.reseau_social_1,
+                "url2": tiersLieux.properties.communication.reseau_social_2,
+                "url3": tiersLieux.properties.communication.reseau_social_3,
+                "url4": tiersLieux.properties.communication.reseau_social_4,
+            },
+            "desc": tiersLieux.properties.complement_info.descriptif_court,
+            "accessibility": tiersLieux.properties.complement_info.accessibilite,
+        };
+
+        //Create the content of Popup
+        let popupContent = `<div class="name">${content.name}</div>`;
+
+        //Create marker with lat and long; add custom icon and add popup
+        let marker = L.marker([content.lat, content.long], { icon: iconCedille });
+        marker.bindPopup(popupContent);
+
+        //Add marker to markerClusterGroup
+        markerClusterGroup.addLayer(marker);
+        //Add marker in markers array 
+        markers.push(marker);
+
+        let item = createElementCard(content, map, marker)
+
+        list.appendChild(item);
+        marker.addEventListener("click", () => {
+            item.classList.add("active");
+        });
+    }
+}
 
 function createElementCard(content, map, marker) {
-    let card = document.createElement("div");
-    card.classList.add("card");
-
-
+    let card = createDomElement("div", "card");
+    let info = createDomElement("div", "info hidden");
     let fields = {
         "name": createNameElement(content),
         "desc": createDescElement(content),
-        "address": createAdressElement(content),
+        "adress": createAdressElement(content),
         "tel": createTelElement(content),
         "email": createEmailElement(content),
         "webSite": createWebSiteElement(content),
@@ -315,7 +269,12 @@ function createElementCard(content, map, marker) {
     };
 
     for (let key in fields) {
-        card.appendChild(fields[key]);
+        if (key === "name" || key === "desc" || key === "adress") {
+            card.appendChild(fields[key]);
+        } else {
+            info.appendChild(fields[key]);
+            card.appendChild(info)
+        }
     }
 
     card.addEventListener("click", () => {
@@ -323,50 +282,42 @@ function createElementCard(content, map, marker) {
         map.setView(marker.getLatLng(), 9);
     });
 
-    /*         fields.tel.classList.remove("hidden");
-            fields.email.classList.remove("hidden");
-            fields.webSite.classList.remove("hidden");
-            fields.social.classList.remove("hidden");
-            fields.accessibility.classList.remove("hidden"); */
-
     return card;
 }
 
 //NAME
 function createNameElement(content) {
-    let divName = document.createElement("div");
-    divName.classList.add("name");
-
-    let name = document.createElement("p");
-    name.innerHTML = content.name;
+    let divName = createDomElement("div", "name");
+    let name = createDomElement("p", "", content.name, "");
 
     divName.appendChild(name);
 
     return divName;
 }
+
+//Description
+function createDescElement(content) {
+    let desc = createDomElement("div", "desc");
+    let descText = createDomElement("p", "", content.desc);
+
+    desc.appendChild(descText);
+
+    return desc;
+}
+
 //ADRESS
 function createAdressElement(content) {
-    let adress = document.createElement("div");
-    adress.classList.add("adress");
+    let adress = createDomElement("div", "adress");
+    let street = createDomElement("div", "street");
+    let streetText = createDomElement("p", "", content.adress.street, "");
+    let code = createDomElement("div", "code");
+    let codeText = createDomElement("p", "", content.adress.code);
+    let city = createDomElement("div", "city");
+    let cityText = createDomElement("p", "", content.adress.city);
 
-    let street = document.createElement("div");
-    street.classList.add("street");
-    let streetText = document.createElement("p");
-    streetText.innerHTML = content.adress.street;
     street.appendChild(streetText);
-
-    let code = document.createElement("div");
-    code.classList.add("code");
-    let codeText = document.createElement("p");
-    codeText.innerHTML = content.adress.code;
     code.appendChild(codeText);
-
-    let city = document.createElement("div");
-    city.classList.add("city");
-    let cityText = document.createElement("p");
-    cityText.innerHTML = content.adress.city;
     city.appendChild(cityText);
-
 
     adress.appendChild(street);
     adress.appendChild(code)
@@ -375,13 +326,11 @@ function createAdressElement(content) {
     return adress;
 }
 
+
 //TEL
 function createTelElement(content) {
-    let divTel = document.createElement("div");
-    divTel.classList.add("tel", "hidden");
-
-    let tel = document.createElement("p");
-    tel.innerHTML = content.contact.tel;
+    let divTel = createDomElement("div", "tel");
+    let tel = createDomElement("p", "", content.contact.tel);
 
     divTel.appendChild(tel);
 
@@ -389,11 +338,8 @@ function createTelElement(content) {
 }
 //EMAIL
 function createEmailElement(content) {
-    let divEmail = document.createElement("div");
-    divEmail.classList.add("email", "hidden");
-
-    let email = document.createElement("p");
-    email.innerHTML = content.contact.email;
+    let divEmail = createDomElement("div", "email");
+    let email = createDomElement("p", "", content.contact.email);
 
     divEmail.appendChild(email);
 
@@ -402,11 +348,8 @@ function createEmailElement(content) {
 
 //Website
 function createWebSiteElement(content) {
-    let webSite = document.createElement("div");
-    webSite.classList.add("web-site", "hidden");
-
-    let webSiteText = document.createElement("p");
-    webSiteText.innerHTML = content.contact.webSite;
+    let webSite = createDomElement("div", "web-site");
+    let webSiteText = createDomElement("p", "", content.contact.webSite);
 
     webSite.appendChild(webSiteText);
 
@@ -415,12 +358,8 @@ function createWebSiteElement(content) {
 
 //SocialMedia
 function createSocialMediaElement(content) {
-    let socialMedia = document.createElement("div");
-    socialMedia.classList.add("social-media", "hidden");
-
+    let socialMedia = createDomElement("div", "social-media");
     let urlSocialMedia = [content.socialMedia.url1, content.socialMedia.url2, content.socialMedia.url3, content.socialMedia.url4];
-    console.log(urlSocialMedia);
-
     let imgSocialMedia = {
         "facebook": "/wp-content/themes/hello-child/assets/images/facebook.png",
         "instagram": "/wp-content/themes/hello-child/assets/images/instagram.png",
@@ -438,12 +377,11 @@ function createSocialMediaElement(content) {
                     let img = document.createElement("img");
                     img.src = imgSocialMedia[key];
 
-                    let link = document.createElement("a");
+                    let link = createDomElement("a", key);
                     link.href = urlSocialMedia[i];
-                    link.classList.add(key);
-
 
                     link.appendChild(img);
+
                     socialMedia.appendChild(link);
                 }
             }
@@ -452,29 +390,53 @@ function createSocialMediaElement(content) {
     return socialMedia;
 }
 
-//Description
-function createDescElement(content) {
-    let desc = document.createElement("div");
-    desc.classList.add("desc");
-
-    let descText = document.createElement("p");
-    descText.innerHTML = content.desc;
-
-    desc.appendChild(descText);
-
-    return desc;
-}
-
 //Accessibility
 function createAccessibilityElement(content) {
-    let accessibility = document.createElement("div");
-    accessibility.classList.add("accessibility", "hidden");
-
-    let accessibilityText = document.createElement("p");
-    accessibilityText.innerHTML = content.accessibility;
+    let accessibility = createDomElement("div", "accessibility");
+    let accessibilityText = createDomElement("p", "", content.accessibility);
 
     accessibility.appendChild(accessibilityText);
 
     return accessibility;
 }
+
+function fixMapLoadingBugs(map) {
+    setInterval(function () {
+        map.invalidateSize();
+    }, 100);
+}
+
+
+
+function cardsEvent(cards) {
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+
+
+            let info = card.querySelector(".info");
+            // Check if clicked card is already active
+            const isActive = card.classList.contains('active');
+
+            // Remove active class from all other cards 
+            cards.forEach(otherCard => {
+                let otherInfo = otherCard.querySelector(".info");
+                if (otherCard !== card && otherCard.classList.contains('active')) {
+                    otherCard.classList.remove('active');
+                    otherInfo.classList.add("hidden");
+                }
+            });
+
+            // Add or remove active class at clicked card
+            if (isActive) {
+                card.classList.remove('active');
+                info.classList.add("hidden");
+            } else {
+                card.classList.add('active');
+                info.classList.remove("hidden");
+
+            }
+        });
+    });
+}
+
 

@@ -1,10 +1,11 @@
-/* .elementor-section.elementor-section-boxed > .elementor-container{
+.elementor-section.elementor-section-boxed>.elementor-container {
     max-width: 100% !important;
-} 
-#content {
+}
+
+#content-div {
     display: flex;
-    margin: 2% 5%;
-}*/
+    margin: 0% 5%
+}
 
 #list {
     width: 30%;
@@ -27,19 +28,15 @@ label {
     height: 800px;
     width: 70%;
     border-radius: 30px;
+    z-index: 0;
 }
 
 .card {
-    transition: transform 0.3s;
     border-bottom: 2px solid transparent;
     border-image: linear-gradient(0.25turn, rgba(255, 249, 34), rgba(255, 0, 128), rgba(56, 2, 155, 0));
     border-image-slice: 1;
     background-color: whitesmoke;
     padding: 10px;
-}
-
-.carte:hover {
-    border: solid 1px black;
 }
 
 .name {
@@ -70,7 +67,9 @@ label {
 }
 
 .active {
-    border: solid 2px red;
+    border-radius: 20px;
+    border-image: linear-gradient(0.25turn, rgb(255, 249, 34), rgb(255, 0, 128)) 1;
+    border-image-width: 5px;
 }
 
 .facebook img,
@@ -86,12 +85,16 @@ label {
 
 
 @media screen and (max-width: 767px) {
-    #button{
+    #content-div {
+        flex-direction: column;
+    }
+
+    #button {
         display: flex;
         justify-content: flex-end;
         margin: 5% 2%;
     }
-    
+
     #list {
         width: 90%;
         height: auto;
@@ -99,7 +102,6 @@ label {
         margin-left: auto;
         overflow: visible;
         display: block;
-        border-radius: 20px;
     }
 
     #map {
@@ -110,6 +112,9 @@ label {
         height: 550px;
     }
 
+    .card {
+        padding: 15px;
+    }
 
     .button-list {
         background-image: url('../images/listIcone.png');
@@ -119,7 +124,8 @@ label {
         background-image: url('../images/map.png');
     }
 
-    .button-list, .button-map{
+    .button-list,
+    .button-map {
         background-repeat: no-repeat;
         background-position: center;
         background-size: calc(100% - 20px);
