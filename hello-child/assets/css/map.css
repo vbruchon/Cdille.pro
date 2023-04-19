@@ -1,11 +1,10 @@
 /* .elementor-section.elementor-section-boxed > .elementor-container{
     max-width: 100% !important;
-}
-
+} 
 #content {
     display: flex;
     margin: 2% 5%;
-} */
+}*/
 
 #list {
     width: 30%;
@@ -36,6 +35,7 @@ label {
     border-image: linear-gradient(0.25turn, rgba(255, 249, 34), rgba(255, 0, 128), rgba(56, 2, 155, 0));
     border-image-slice: 1;
     background-color: whitesmoke;
+    padding: 10px;
 }
 
 .carte:hover {
@@ -86,6 +86,12 @@ label {
 
 
 @media screen and (max-width: 767px) {
+    #button{
+        display: flex;
+        justify-content: flex-end;
+        margin: 5% 2%;
+    }
+    
     #list {
         width: 90%;
         height: auto;
@@ -93,6 +99,7 @@ label {
         margin-left: auto;
         overflow: visible;
         display: block;
+        border-radius: 20px;
     }
 
     #map {
@@ -103,17 +110,48 @@ label {
         height: 550px;
     }
 
+
+    .button-list {
+        background-image: url('../images/listIcone.png');
+    }
+
+    .button-map {
+        background-image: url('../images/map.png');
+    }
+
     .button-list, .button-map{
-        width: 65px;
-        padding: 7px;
-        border-radius: 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: calc(100% - 20px);
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
     }
 
-    .button-active {
+    .list-active {
+        background-image: url('../images/listIcone-selected.png');
+    }
+
+    .map-active {
+        background-image: url('../images/map-selected.png');
+    }
+
+    .list-active,
+    .map-active {
         background-color: rgb(186, 34, 83);
+        padding: 10px;
+        border-radius: 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: calc(100% - 20px);
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
     }
-
-
 }
 
 /* #map {

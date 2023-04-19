@@ -40,50 +40,42 @@ fetch("/wp-content/themes/hello-child/assets/geojson/newData.json")
 
 
         if (window.innerWidth < 768) {
-            const buttonList = document.createElement('img');
-            buttonList.src = "/wp-content/themes/hello-child/assets/images/listIcone.png"
-            buttonList.classList.add("button-list");
+            const buttonDiv = document.createElement('div');
+            buttonDiv.id = "button";
+            
+            const buttonList = document.createElement('button');
+            buttonList.classList.add("list-active");
 
-            const buttonMap = document.createElement('img');
-            buttonMap.src = "/wp-content/themes/hello-child/assets/images/map.png"
+            const buttonMap = document.createElement('button');
             buttonMap.classList.add("button-map");
 
-            contentDiv.insertBefore(buttonMap, contentDiv.firstChild);
-            contentDiv.insertBefore(buttonList, buttonMap);
+            buttonDiv.appendChild(buttonList);
+            buttonDiv.appendChild(buttonMap)
+            contentDiv.insertBefore(buttonDiv, contentDiv.firstChild);
+
+
 
 
 
             buttonList.addEventListener("click", () => {
-                mapDiv.style.display = "none";
+                buttonList.classList.remove("button-list");
+                buttonList.classList.add("list-active")
                 list.style.display = "block";
 
-                buttonList.src = "/wp-content/themes/hello-child/assets/images/listIcone-selected.png";
-
-
-                buttonList.classList.add("button-active");
-                buttonMap.src = "/wp-content/themes/hello-child/assets/images/map.png"
-                buttonMap.classList.remove("button-active")
-            })
-
-
-
-
-
+                mapDiv.style.display = "none";
+                buttonMap.classList.remove("map-active");
+                buttonMap.classList.add("button-map")
+            });
 
 
             buttonMap.addEventListener("click", () => {
+                buttonMap.classList.remove("button-map")
+                buttonMap.classList.add("map-active")
                 mapDiv.style.display = "block";
+
                 list.style.display = "none";
-
-                buttonList.classList.remove("button-active");
-
-
-
-
-
-                buttonMap.src = "/wp-content/themes/hello-child/assets/images/map-selected.png";
-                buttonList.src = "/wp-content/themes/hello-child/assets/images/listIcone.png"
-                buttonMap.classList.add('button-active')
+                buttonList.classList.remove("list-active")
+                buttonList.classList.add("button-list")
             })
         }
 
