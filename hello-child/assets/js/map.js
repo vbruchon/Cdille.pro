@@ -1,74 +1,10 @@
-//Création de map, icon, tileLayer
-let mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-const map = L.map("map").setView([44.7241, 5.0864], 9);
-let iconCedille = L.icon({ iconUrl: "/wp-content/themes/hello-child/assets/images/markerC.png", iconSize: [65, 67] });
-L.tileLayer(mapUrl, { maxZoom: 19, attribution: "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>" }).addTo(map);
+/**
+ * This code creates a map using LeafletJS, fetches a JSON file containing data about tiers-lieux (places for coworking, makerspace, fablabs, etc.) and displays them on the map and in a list. It also creates a filter form allowing to filter the displayed tiers-lieux by their type. 
+ * The `createFilterBar()` function creates the filter form, adds an event listener on the `change` event of the form, and defines what happens when the form is changed. It retrieves the value of the selected option, clears the marker cluster group, loops over the markers, and adds the markers whose type corresponds to the selected option to the cluster group. Then, it displays or hides the cards according to the markers' display.
+ * The `createListAndMapElement()` function creates the list and the markers on the map. It
+ */
 
-
-// Create feature group for all markers
-let allMarkersGroup = L.featureGroup().addTo(map);
-// Create feature group for filtered markers
-let filteredMarkersGroup = L.featureGroup().addTo(map);
-let markers = [];
-
-//DOM ELEMENT
-let list = document.getElementById("list");
-let form = document.getElementById("filter-form");
-let contentDiv = document.getElementById("content-div");
-let mapDiv = document.getElementById("map");
-
-let buttonsCreated = false;
-
-fetch("/wp-content/themes/hello-child/assets/geojson/newData.json")
-    .then(response => response.text())
-    .then(data => {
-        const parsedData = JSON.parse(data); //parse data en JSON
-
-        let markerClusterGroup = L.markerClusterGroup();//Create a ClusterGroup to group markers
-
-        createFilterBar(form, filteredMarkersGroup, allMarkersGroup, markers);
-        /*         window.addEventListener("resize", () => {
-                    if (window.innerWidth < 768) {
-                        createListAndMapButtons();
-                    }
-                }) */
-
-        // appel initial pour vérifier la taille de l'écran
-        checkScreenSize();
-
-        createMapAndListElement(markers, markerClusterGroup, parsedData);
-
-        //Center layer map with respect to the coordinate of all clusterGroups
-        map.fitBounds(markerClusterGroup.getBounds(), { minZoom: 9 });
-        map.addLayer(markerClusterGroup);
-
-        cardsEvent(document.querySelectorAll('.card'));
-
-        fixMapLoadingBugs(map)
-
-        // ajouter un écouteur pour vérifier la taille de l'écran lorsque l'utilisateur redimensionne la fenêtre
-        window.addEventListener("resize", checkScreenSize);
-    })
-    .catch(error => console.error(error));
-
-
-function checkScreenSize() {
-    if (window.innerWidth < 768 && !buttonsCreated) {
-        createListAndMapButtons();
-        buttonsCreated = true;
-    } else if (window.innerWidth >= 768 && buttonsCreated) {
-        removeListAndMapButtons();
-        buttonsCreated = false;
-    }
-}
-
-function removeListAndMapButtons() {
-    return document.getElementById("button").remove()
-}
-
-
-
-
+/* __________FUNCTION__________ */
 /**
  * Creates an HTML element with the specified tag, id or class and content.
  * @param {string} balise - The HTML tag of the element to create.
@@ -99,114 +35,72 @@ function createDomElement(balise, idOrClass = "", content = "", innerHtml = "") 
     return domElement;
 }
 
-function createFilterBar(form, filteredMarkersGroup, allMarkersGroup, markers) {
-    form.innerHTML += ` <input type="radio" id="all" name="type" value="all" checked>
-                            <label for="all">Tous les Tiers-Lieux</label><br>
+function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
+    form.innerHTML = `<select name="typePlace" id="typePlaceForm">
+                            <option class="type-place-option" value="all" selected>Tous les tiers-lieu</option>
+                         </select>`;
+    let typePlaceForm = document.getElementById("typePlaceForm");
+    let typePlacePresent = ['all'];
+    let features = parsedData.features
 
-                            <input type="radio" id="5" name="type" value="5">
-                            <label for="five">5 Tiers-Lieux</label><br>
+    for (let tiersLieux of features) {
+        let typePlace = tiersLieux.properties.complement_info.typePlace;
 
-                            <input type="radio" id="2" name="type" value="2">
-                            <label for="two">2 Tiers-Lieux</label><br>
-        `;
-
-    form.addEventListener("change", (e) => {
-        let radios = form.elements.type;
-        let selectedType;
-        let numSelected;
-
-        for (let radio of radios) {
-            if (radio.checked) {
-                selectedType = radio.value;
-                break;
+        for (tp of typePlace) {
+            if ((!typePlacePresent.includes(tp)) && tp !== "") {
+                typePlaceForm.innerHTML += '<option id="' + tp + ' class="type-place-option" value="' + tp + '">' + tp + '</option>';
+                typePlacePresent.push(tp);
             }
         }
 
-        // Determines the number of markers to display based on the selected value
-        if (selectedType === "all") {
-            numSelected = markers.length;
+    }
 
-            markers.forEach((marker) => {
-                allMarkersGroup.addLayer(marker);
-            })
-            filteredMarkersGroup = allMarkersGroup;
-        } else {
-            numSelected = parseInt(selectedType);
 
-            filteredMarkersGroup.clearLayers();
+    typePlaceForm.addEventListener("change", () => {
+        let selectedIndex = typePlaceForm.selectedIndex;
+        let typePlaceSelected;
+        let optionSelected;
 
-            // Add filtered markers to the filteredMarkersGroup
-            for (var i = 0; i < numSelected; i++) {
-                filteredMarkersGroup.addLayer(markers[i]);
-            }
 
-            // Remove unfiltered markers from the allMarkersGroup
-            markers.forEach(function (marker) {
-                if (!filteredMarkersGroup.hasLayer(marker)) {
-                    allMarkersGroup.removeLayer(marker);
-                }
-            });
+        if (selectedIndex !== -1) {
+            optionSelected = typePlaceForm.options[selectedIndex];
+            typePlaceSelected = optionSelected.value
         }
-        // Centering on the boundaries of the filtered markers
-        map.fitBounds(filteredMarkersGroup.getBounds());
 
-
-        // Browse all markers and add or remove from the map incording to the value of numSelected
-        markers.forEach((marker, index) => {
-            if (index < numSelected) {
-                marker.addTo(map);
-            } else {
-                marker.removeFrom(map);
-            }
-        });
-
-
-        // Display elements of the list incording to markers display 
+        markerClusterGroup.clearLayers();
         const listItems = list.querySelectorAll(".card");
 
-        for (let i = 0; i < listItems.length; i++) {
-            if (i < numSelected) {
-                listItems[i].style.display = "block";
+
+        markers.forEach((marker) => {
+            const markerTypePlaces = marker.properties.typePlace
+
+            if (typePlaceSelected === "all") {
+                markerClusterGroup.addLayer(marker);
             } else {
-                listItems[i].style.display = "none";
+                for (let type of markerTypePlaces) {
+                    if (type === typePlaceSelected) {
+                        markerClusterGroup.addLayer(marker);
+                    }
+                }
+
             }
-        }
-    });
+            map.addLayer(markerClusterGroup)
+        });
+        map.addLayer(markerClusterGroup)
 
+        listItems.forEach((card) => {
+            let cardTypePlace = card.getElementsByClassName("type-place");
+
+            if (cardTypePlace[0].textContent.includes(typePlaceSelected) || typePlaceSelected === "all") {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    })
 }
 
-function createListAndMapButtons() {
-    const buttonDiv = createDomElement('div', "#button");
-
-    const buttonList = createDomElement('button', 'list-active');
-    const buttonMap = createDomElement('button', 'button-map');
-
-    buttonDiv.appendChild(buttonList);
-    buttonDiv.appendChild(buttonMap);
-    contentDiv.insertBefore(buttonDiv, contentDiv.firstChild);
-
-    buttonList.addEventListener("click", () => {
-        buttonList.classList.remove("button-list");
-        buttonList.classList.add("list-active");
-        list.style.display = "block";
-
-        mapDiv.style.display = "none";
-        buttonMap.classList.remove("map-active");
-        buttonMap.classList.add("button-map");
-    });
-
-    buttonMap.addEventListener("click", () => {
-        buttonMap.classList.remove("button-map");
-        buttonMap.classList.add("map-active");
-        mapDiv.style.display = "block";
-
-        list.style.display = "none";
-        buttonList.classList.remove("list-active");
-        buttonList.classList.add("button-list");
-    });
-}
-
-function createMapAndListElement(markers, markerClusterGroup, parsedData) {
+function createListAndMapElement(markerClusterGroup, parsedData) {
     for (let tiersLieux of parsedData.features) {
         //content = object contains the tiers-lieux's content
         let content = {
@@ -231,28 +125,34 @@ function createMapAndListElement(markers, markerClusterGroup, parsedData) {
             },
             "desc": tiersLieux.properties.complement_info.descriptif_court,
             "accessibility": tiersLieux.properties.complement_info.accessibilite,
+            "typePlace": tiersLieux.properties.complement_info.typePlace
         };
 
         //Create the content of Popup
         let popupContent = `<div class="name">${content.name}</div>`;
-
         //Create marker with lat and long; add custom icon and add popup
         let marker = L.marker([content.lat, content.long], { icon: iconCedille });
+        marker.properties = { typePlace: content.typePlace }
         marker.bindPopup(popupContent);
 
         //Add marker to markerClusterGroup
         markerClusterGroup.addLayer(marker);
         //Add marker in markers array 
         markers.push(marker);
+        map.addLayer(markerClusterGroup);
 
+        //Create listElement 
         let item = createElementCard(content, map, marker)
-
         list.appendChild(item);
+
+        //link marker to card
         marker.addEventListener("click", () => {
             item.classList.add("active");
+            list.insertBefore(item, list.firstChild)
         });
     }
 }
+
 
 function createElementCard(content, map, marker) {
     let card = createDomElement("div", "card");
@@ -265,11 +165,12 @@ function createElementCard(content, map, marker) {
         "email": createEmailElement(content),
         "webSite": createWebSiteElement(content),
         "social": createSocialMediaElement(content),
-        "accessibility": createAccessibilityElement(content)
+        "typePlace": createTypePlaceElement(content)
     };
+    let keyName = ["name", "adress"];
 
     for (let key in fields) {
-        if (key === "name" || key === "desc" || key === "adress") {
+        if (keyName.includes(key)) {
             card.appendChild(fields[key]);
         } else {
             info.appendChild(fields[key]);
@@ -278,13 +179,14 @@ function createElementCard(content, map, marker) {
     }
 
     card.addEventListener("click", () => {
+        map.setView(marker.getLatLng(), 16);
         marker.openPopup();
-        map.setView(marker.getLatLng(), 9);
     });
 
     return card;
 }
 
+/*________CARD_ELEMENT_______*/
 //NAME
 function createNameElement(content) {
     let divName = createDomElement("div", "name");
@@ -294,8 +196,7 @@ function createNameElement(content) {
 
     return divName;
 }
-
-//Description
+//DESC
 function createDescElement(content) {
     let desc = createDomElement("div", "desc");
     let descText = createDomElement("p", "", content.desc);
@@ -304,7 +205,6 @@ function createDescElement(content) {
 
     return desc;
 }
-
 //ADRESS
 function createAdressElement(content) {
     let adress = createDomElement("div", "adress");
@@ -325,8 +225,6 @@ function createAdressElement(content) {
 
     return adress;
 }
-
-
 //TEL
 function createTelElement(content) {
     let divTel = createDomElement("div", "tel");
@@ -345,7 +243,6 @@ function createEmailElement(content) {
 
     return divEmail;
 }
-
 //Website
 function createWebSiteElement(content) {
     let webSite = createDomElement("div", "web-site");
@@ -355,7 +252,6 @@ function createWebSiteElement(content) {
 
     return webSite;
 }
-
 //SocialMedia
 function createSocialMediaElement(content) {
     let socialMedia = createDomElement("div", "social-media");
@@ -389,30 +285,20 @@ function createSocialMediaElement(content) {
     }
     return socialMedia;
 }
-
 //Accessibility
-function createAccessibilityElement(content) {
-    let accessibility = createDomElement("div", "accessibility");
-    let accessibilityText = createDomElement("p", "", content.accessibility);
+function createTypePlaceElement(content) {
+    let typePlace = createDomElement("div", "type-place");
+    let typePlaceText = createDomElement("p", "", content.typePlace);
 
-    accessibility.appendChild(accessibilityText);
-
-    return accessibility;
+    typePlace.appendChild(typePlaceText);
+    typePlace.style.display = "none"
+    return typePlace;
 }
 
-function fixMapLoadingBugs(map) {
-    setInterval(function () {
-        map.invalidateSize();
-    }, 100);
-}
-
-
-
+//__________EVENTS__________
 function cardsEvent(cards) {
     cards.forEach(card => {
         card.addEventListener('click', () => {
-
-
             let info = card.querySelector(".info");
             // Check if clicked card is already active
             const isActive = card.classList.contains('active');
@@ -435,8 +321,44 @@ function cardsEvent(cards) {
                 info.classList.remove("hidden");
 
             }
+            marker.openPopup();
+            map.setView(marker.getLatLng(), 12);
         });
     });
 }
+//_________________________________________________________________________________________________________________________________________________________
 
 
+/**_____________VARIABLE_____________ */
+//Création de map, icon, tileLayer
+let mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+const map = L.map("map").setView([44.7241, 5.0864], 9);
+let iconCedille = L.icon({ iconUrl: "/wp-content/themes/hello-child/assets/images/markerC.png", iconSize: [65, 67] });
+L.tileLayer(mapUrl, { maxZoom: 19, attribution: "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>" }).addTo(map);
+
+let markers = [];
+let buttonsCreated = false;
+
+//DOM ELEMENT
+let list = document.getElementById("list");
+let form = document.getElementById("filter-form");
+let contentDiv = document.getElementById("content-div");
+let mapDiv = document.getElementById("map");
+//_________________________________________________________________________________________________________________________________________________________
+
+
+
+fetch("/wp-content/themes/hello-child/assets/geojson/newData.json")
+    .then(response => response.text())
+    .then(data => {
+        const parsedData = JSON.parse(data);
+
+        //Create a ClusterGroup to group markers
+        let markerClusterGroup = L.markerClusterGroup();
+        createFilterBar(form, markers, parsedData, markerClusterGroup, map);
+
+        createListAndMapElement(markerClusterGroup, parsedData);
+
+        cardsEvent(document.querySelectorAll('.card'));
+    })
+    .catch(error => console.error(error));

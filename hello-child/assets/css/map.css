@@ -70,6 +70,7 @@ label {
     border-radius: 20px;
     border-image: linear-gradient(0.25turn, rgb(255, 249, 34), rgb(255, 0, 128)) 1;
     border-image-width: 5px;
+    padding-left: 20px;
 }
 
 .facebook img,
