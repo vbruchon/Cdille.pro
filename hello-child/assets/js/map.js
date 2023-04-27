@@ -35,6 +35,36 @@ function createDomElement(balise, idOrClass = "", content = "", innerHtml = "") 
     return domElement;
 }
 /**
+ * Filters the markers and list items based on the selected type places
+ * and adds the filtered markers to the marker cluster group and shows/hides
+ * the corresponding list items
+ *
+ * @param {Array} markers - An array of markers
+ * @param {Array} typePlaceSelected - An array of selected type places
+ * @param {NodeList} listItems - A NodeList of list items
+ * @param {Object} markerClusterGroup - The marker cluster group object
+ */
+function filteredMapAndList(markers, typePlaceSelected, listItems, markerClusterGroup) {
+    markers.forEach((marker) => {
+        const markerTypePlaces = marker.properties.typePlace;
+
+        if (typePlaceSelected.includes("all") || typePlaceSelected.some((type) => markerTypePlaces.includes(type))) {
+            markerClusterGroup.addLayer(marker);
+        }
+    });
+    map.addLayer(markerClusterGroup);
+
+    listItems.forEach((card) => {
+        let cardTypePlace = card.getElementsByClassName("type-place");
+
+        if (typePlaceSelected.includes("all") || typePlaceSelected.some((type) => cardTypePlace[0].textContent.includes(type))) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+/**
  * Creates a filter bar to filter markers on a map and cards on a list based on the type of places.
  * @param {HTMLElement} form - The form element to append the select element to.
  * @param {Array} markers - The array of Leaflet markers to filter.
@@ -43,96 +73,84 @@ function createDomElement(balise, idOrClass = "", content = "", innerHtml = "") 
  * @param {L.Map} map - The Leaflet map object.
 */
 function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
-    form.innerHTML = `<select name="typePlace" id="typePlaceForm">
-                            <option class="type-place-option" value="all" selected>Tous les tiers-lieu</option>
-                         </select>`;
+    form.innerHTML = `<div id="typePlaceForm">
+                        <div class="select-selected">Sélectionner les types de tiers-lieux</div>
+                        <div class="select-items select-hide"> 
+                            <div class="option">
+                                <span class="name-selected-items">Tous les types de Tiers-lieux</span>
+                                <input type="checkbox" name="typePlace[]" id="all" value="all" checked>
+                            </div>
+                        </div>
+                    </div>`;
+
     let typePlaceForm = document.getElementById("typePlaceForm");
+    let typePlaceItem = document.querySelector('.select-items');
     let typePlacePresent = ['all'];
     let features = parsedData.features
 
     for (let tiersLieux of features) {
         let typePlace = tiersLieux.properties.complement_info.typePlace;
-
-        for (tp of typePlace) {
-            if ((!typePlacePresent.includes(tp)) && tp !== "") {
-                typePlaceForm.innerHTML += '<option id="' + tp + ' class="type-place-option" value="' + tp + '">' + tp + '</option>';
-                typePlacePresent.push(tp);
+        for (let typePlaceName of typePlace) {
+            if ((!typePlacePresent.includes(typePlaceName)) && typePlaceName !== "") {
+                typePlaceItem.innerHTML += `<div class="option">
+                                                <span class="name-selected-items">` + typePlaceName + `</span>
+                                                <input type="checkbox" id="` + typePlaceName + `" class="type-place-option" value="` + typePlaceName + `">
+                                            </div>`;
+                typePlacePresent.push(typePlaceName);
             }
         }
-
     }
 
-
     typePlaceForm.addEventListener("change", () => {
-        let selectedIndex = typePlaceForm.selectedIndex;
-        let typePlaceSelected;
-        let optionSelected;
+        const checkboxes = typePlaceForm.querySelectorAll('input[type="checkbox"]');
+        const listItems = list.querySelectorAll(".card");
+        const typePlaceSelected = [];
 
-
-        if (selectedIndex !== -1) {
-            optionSelected = typePlaceForm.options[selectedIndex];
-            typePlaceSelected = optionSelected.value
-        }
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                typePlaceSelected.push(checkbox.value);
+            }
+        })
 
         markerClusterGroup.clearLayers();
-        const listItems = list.querySelectorAll(".card");
-
-
-        markers.forEach((marker) => {
-            const markerTypePlaces = marker.properties.typePlace
-
-            if (typePlaceSelected === "all") {
-                markerClusterGroup.addLayer(marker);
-            } else {
-                for (let type of markerTypePlaces) {
-                    if (type === typePlaceSelected) {
-                        markerClusterGroup.addLayer(marker);
-                    }
-                }
-
-            }
-            map.addLayer(markerClusterGroup)
-        });
-        map.addLayer(markerClusterGroup)
-
-        listItems.forEach((card) => {
-            let cardTypePlace = card.getElementsByClassName("type-place");
-
-            if (cardTypePlace[0].textContent.includes(typePlaceSelected) || typePlaceSelected === "all") {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
-            }
-        });
-    })
+        filteredMapAndList(markers, typePlaceSelected, listItems, markerClusterGroup);
+    });
+    // Ouverture et fermeture de la liste déroulante
+    document.querySelector('.select-selected').addEventListener('click', function () {
+        if (document.querySelector('.select-items').classList.contains('select-hide')) {
+            document.querySelector('.select-items').classList.remove('select-hide');
+        } else {
+            document.querySelector('.select-items').classList.add('select-hide');
+        }
+    });
 }
 /**
  * Create a list of elements and markers on the map
  * @param {L.markerClusterGroup} markerClusterGroup - The marker group for the map
- * @param {Object} parsedData - The parsed data for the tiers
- * 
- * The content object contains all the information about a location
- * @typedef {Object} content
- * @property {number} lat – The latitude of the location
- * @property {number} long – The longitude of the location
- * @property {string} name – The name of the location
- * @property {Object} address – The address of the location
- * @property {string} address.street - The street of the location
- * @property {string} adress.code - The postal code of the Offsite
- * @property {string} adress.city - The city of the co-location
- * @property {Object} contact – The contact information of the shop
- * @property {string} contact.tel - The phone number of the shop
- * @property {string} contact.email - The email address of the shop
- * @property {string} contact.webSite - The website of the shop
- * @property {Object} socialMedia - The links to the social networks of the shop
- * @property {string} socialMedia.url1 – The first social network link
- * @property {string} socialMedia.url2 – The second social network link
- * @property {string} socialMedia.url3 – The third social network link
- * @property {string} socialMedia.url4 – The fourth social network link
- * @property {string} desc - The short description of the third place
- * @property {string} accessibility – The accessibility of the third-party venue
- * @property {string} typePlace - The type of the location
- */
+        * @param {Object} parsedData - The parsed data for the tiers
+        *
+        * The content object contains all the information about a location
+        * @typedef {Object} content
+        * @property {number} lat – The latitude of the location
+        * @property {number} long – The longitude of the location
+        * @property {string} name – The name of the location
+        * @property {Object} address – The address of the location
+        * @property {string} address.street - The street of the location
+        * @property {string} adress.code - The postal code of the Offsite
+        * @property {string} adress.city - The city of the co-location
+        * @property {Object} contact – The contact information of the shop
+        * @property {string} contact.tel - The phone number of the shop
+        * @property {string} contact.email - The email address of the shop
+        * @property {string} contact.webSite - The website of the shop
+        * @property {Object} socialMedia - The links to the social networks of the shop
+        * @property {string} socialMedia.url1 – The first social network link
+        * @property {string} socialMedia.url2 – The second social network link
+        * @property {string} socialMedia.url3 – The third social network link
+        * @property {string} socialMedia.url4 – The fourth social network link
+        * @property {string} desc - The short description of the third place
+        * @property {string} accessibility – The accessibility of the third-party venue
+        * @property {string} typePlace - The type of the location
+        */
 function createListAndMapElement(markerClusterGroup, parsedData) {
     for (let tiersLieux of parsedData.features) {
         //content = object contains the tiers-lieux's content
@@ -186,10 +204,10 @@ function createListAndMapElement(markerClusterGroup, parsedData) {
 /**
  * Creates an HTML map element from the information of a location.
  * @param {Object} content - The object containing the information about the location.
- * @param {Object} map - The Leaflet object of the map.
- * @param {Object} marker - The marker Leaflet object associated with the Landmark.
- * @returns {HTMLElement} - The map element created.
- */
+        * @param {Object} map - The Leaflet object of the map.
+        * @param {Object} marker - The marker Leaflet object associated with the Landmark.
+        * @returns {HTMLElement} - The map element created.
+        */
 function createElementCard(content, map, marker) {
     let card = createDomElement("div", "card");
     let info = createDomElement("div", "info hidden");
@@ -326,8 +344,8 @@ function createTypePlaceElement(content) {
 //__________EVENTS__________
 /**
  * Add click event listeners to each card element in the provided array
- * @param {Array<HTMLElement>} cards - An array of card elements to add click event listeners to
- */
+ * @param {Array < HTMLElement >} cards - An array of card elements to add click event listeners to
+        */
 function cardEvent(cards) {
     cards.forEach(card => {
         card.addEventListener('click', () => {
@@ -354,10 +372,10 @@ function cardEvent(cards) {
  * Disables all other cards except the corresponding one.
  * Activates or deactivates the corresponding card.
  * Inserts the corresponding card at the beginning of the list.
- * 
+ *
  * @param {L.Marker} marker - The marker to add the event listener to.
- * @param {HTMLElement} item - The corresponding card element to activate or deactivate.
- */
+        * @param {HTMLElement} item - The corresponding card element to activate or deactivate.
+        */
 function markerEvent(marker, item) {
     marker.addEventListener("click", () => {
         let allCards = document.querySelectorAll('.card');
@@ -377,7 +395,7 @@ function markerEvent(marker, item) {
 /**
  * Toggles the active state of a card and hides or shows its "info" element
  * @param {HTMLElement} card - The card element to toggle the active state and info visibility for
- */
+        */
 function toggleActiveCard(card) {
     const isActive = card.classList.contains('active');
     let info = card.querySelector(".info");
@@ -420,10 +438,9 @@ fetch("/wp-content/themes/hello-child/assets/geojson/newData.json")
 
         //Create a ClusterGroup to group markers
         let markerClusterGroup = L.markerClusterGroup();
+
         createFilterBar(form, markers, parsedData, markerClusterGroup, map);
-
         createListAndMapElement(markerClusterGroup, parsedData);
-
         cardEvent(document.querySelectorAll('.card'));
     })
     .catch(error => console.error(error));
