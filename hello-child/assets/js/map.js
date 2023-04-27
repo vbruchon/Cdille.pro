@@ -4,7 +4,7 @@
  * The `createListAndMapElement()` function creates the list and the markers on the map. It
  */
 
-/* __________FUNCTION__________ */
+/* _______________________________________________________________________FUNCTION_______________________________________________________________________ */
 /**
  * Creates an HTML element with the specified tag, id or class and content.
  * @param {string} balise - The HTML tag of the element to create.
@@ -34,7 +34,14 @@ function createDomElement(balise, idOrClass = "", content = "", innerHtml = "") 
 
     return domElement;
 }
-
+/**
+ * Creates a filter bar to filter markers on a map and cards on a list based on the type of places.
+ * @param {HTMLElement} form - The form element to append the select element to.
+ * @param {Array} markers - The array of Leaflet markers to filter.
+ * @param {Object} parsedData - The parsed GeoJSON data.
+ * @param {L.markerClusterGroup} markerClusterGroup - The Leaflet marker cluster group.
+ * @param {L.Map} map - The Leaflet map object.
+*/
 function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
     form.innerHTML = `<select name="typePlace" id="typePlaceForm">
                             <option class="type-place-option" value="all" selected>Tous les tiers-lieu</option>
@@ -99,7 +106,33 @@ function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
         });
     })
 }
-
+/**
+ * Create a list of elements and markers on the map
+ * @param {L.markerClusterGroup} markerClusterGroup - The marker group for the map
+ * @param {Object} parsedData - The parsed data for the tiers
+ * 
+ * The content object contains all the information about a location
+ * @typedef {Object} content
+ * @property {number} lat – The latitude of the location
+ * @property {number} long – The longitude of the location
+ * @property {string} name – The name of the location
+ * @property {Object} address – The address of the location
+ * @property {string} address.street - The street of the location
+ * @property {string} adress.code - The postal code of the Offsite
+ * @property {string} adress.city - The city of the co-location
+ * @property {Object} contact – The contact information of the shop
+ * @property {string} contact.tel - The phone number of the shop
+ * @property {string} contact.email - The email address of the shop
+ * @property {string} contact.webSite - The website of the shop
+ * @property {Object} socialMedia - The links to the social networks of the shop
+ * @property {string} socialMedia.url1 – The first social network link
+ * @property {string} socialMedia.url2 – The second social network link
+ * @property {string} socialMedia.url3 – The third social network link
+ * @property {string} socialMedia.url4 – The fourth social network link
+ * @property {string} desc - The short description of the third place
+ * @property {string} accessibility – The accessibility of the third-party venue
+ * @property {string} typePlace - The type of the location
+ */
 function createListAndMapElement(markerClusterGroup, parsedData) {
     for (let tiersLieux of parsedData.features) {
         //content = object contains the tiers-lieux's content
@@ -145,15 +178,18 @@ function createListAndMapElement(markerClusterGroup, parsedData) {
         let item = createElementCard(content, map, marker)
         list.appendChild(item);
 
+
         //link marker to card
-        marker.addEventListener("click", () => {
-            item.classList.add("active");
-            list.insertBefore(item, list.firstChild)
-        });
+        markerEvent(marker, item);
     }
 }
-
-
+/**
+ * Creates an HTML map element from the information of a location.
+ * @param {Object} content - The object containing the information about the location.
+ * @param {Object} map - The Leaflet object of the map.
+ * @param {Object} marker - The marker Leaflet object associated with the Landmark.
+ * @returns {HTMLElement} - The map element created.
+ */
 function createElementCard(content, map, marker) {
     let card = createDomElement("div", "card");
     let info = createDomElement("div", "info hidden");
@@ -187,7 +223,6 @@ function createElementCard(content, map, marker) {
 }
 
 /*________CARD_ELEMENT_______*/
-//NAME
 function createNameElement(content) {
     let divName = createDomElement("div", "name");
     let name = createDomElement("p", "", content.name, "");
@@ -196,7 +231,6 @@ function createNameElement(content) {
 
     return divName;
 }
-//DESC
 function createDescElement(content) {
     let desc = createDomElement("div", "desc");
     let descText = createDomElement("p", "", content.desc);
@@ -205,7 +239,6 @@ function createDescElement(content) {
 
     return desc;
 }
-//ADRESS
 function createAdressElement(content) {
     let adress = createDomElement("div", "adress");
     let street = createDomElement("div", "street");
@@ -225,7 +258,6 @@ function createAdressElement(content) {
 
     return adress;
 }
-//TEL
 function createTelElement(content) {
     let divTel = createDomElement("div", "tel");
     let tel = createDomElement("p", "", content.contact.tel);
@@ -234,7 +266,6 @@ function createTelElement(content) {
 
     return divTel;
 }
-//EMAIL
 function createEmailElement(content) {
     let divEmail = createDomElement("div", "email");
     let email = createDomElement("p", "", content.contact.email);
@@ -243,7 +274,6 @@ function createEmailElement(content) {
 
     return divEmail;
 }
-//Website
 function createWebSiteElement(content) {
     let webSite = createDomElement("div", "web-site");
     let webSiteText = createDomElement("p", "", content.contact.webSite);
@@ -252,7 +282,6 @@ function createWebSiteElement(content) {
 
     return webSite;
 }
-//SocialMedia
 function createSocialMediaElement(content) {
     let socialMedia = createDomElement("div", "social-media");
     let urlSocialMedia = [content.socialMedia.url1, content.socialMedia.url2, content.socialMedia.url3, content.socialMedia.url4];
@@ -285,7 +314,6 @@ function createSocialMediaElement(content) {
     }
     return socialMedia;
 }
-//Accessibility
 function createTypePlaceElement(content) {
     let typePlace = createDomElement("div", "type-place");
     let typePlaceText = createDomElement("p", "", content.typePlace);
@@ -296,7 +324,11 @@ function createTypePlaceElement(content) {
 }
 
 //__________EVENTS__________
-function cardsEvent(cards) {
+/**
+ * Add click event listeners to each card element in the provided array
+ * @param {Array<HTMLElement>} cards - An array of card elements to add click event listeners to
+ */
+function cardEvent(cards) {
     cards.forEach(card => {
         card.addEventListener('click', () => {
             let info = card.querySelector(".info");
@@ -307,25 +339,58 @@ function cardsEvent(cards) {
             cards.forEach(otherCard => {
                 let otherInfo = otherCard.querySelector(".info");
                 if (otherCard !== card && otherCard.classList.contains('active')) {
-                    otherCard.classList.remove('active');
-                    otherInfo.classList.add("hidden");
+                    toggleActiveCard(otherCard);
                 }
             });
-
-            // Add or remove active class at clicked card
-            if (isActive) {
-                card.classList.remove('active');
-                info.classList.add("hidden");
-            } else {
-                card.classList.add('active');
-                info.classList.remove("hidden");
-
-            }
+            toggleActiveCard(card);
             marker.openPopup();
             map.setView(marker.getLatLng(), 12);
         });
     });
 }
+
+/**
+ * Adds click event listener to a marker.
+ * Disables all other cards except the corresponding one.
+ * Activates or deactivates the corresponding card.
+ * Inserts the corresponding card at the beginning of the list.
+ * 
+ * @param {L.Marker} marker - The marker to add the event listener to.
+ * @param {HTMLElement} item - The corresponding card element to activate or deactivate.
+ */
+function markerEvent(marker, item) {
+    marker.addEventListener("click", () => {
+        let allCards = document.querySelectorAll('.card');
+
+        // Désactiver toutes les autres cartes
+        allCards.forEach(otherCard => {
+            if (otherCard !== item && otherCard.classList.contains('active')) {
+                toggleActiveCard(otherCard);
+            }
+        });
+
+        // Activer ou désactiver la carte correspondante
+        toggleActiveCard(item);
+        list.insertBefore(item, list.firstChild);
+    });
+}
+/**
+ * Toggles the active state of a card and hides or shows its "info" element
+ * @param {HTMLElement} card - The card element to toggle the active state and info visibility for
+ */
+function toggleActiveCard(card) {
+    const isActive = card.classList.contains('active');
+    let info = card.querySelector(".info");
+
+    if (isActive) {
+        card.classList.remove('active');
+        info.classList.add("hidden");
+    } else {
+        card.classList.add('active');
+        info.classList.remove("hidden");
+    }
+}
+
 //_________________________________________________________________________________________________________________________________________________________
 
 
@@ -359,6 +424,6 @@ fetch("/wp-content/themes/hello-child/assets/geojson/newData.json")
 
         createListAndMapElement(markerClusterGroup, parsedData);
 
-        cardsEvent(document.querySelectorAll('.card'));
+        cardEvent(document.querySelectorAll('.card'));
     })
     .catch(error => console.error(error));
