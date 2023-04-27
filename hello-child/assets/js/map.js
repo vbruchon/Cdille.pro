@@ -64,32 +64,50 @@ function filteredMapAndList(markers, typePlaceSelected, listItems, markerCluster
         }
     });
 }
+
+
+    
 /**
- * Creates a filter bar to filter markers on a map and cards on a list based on the type of places.
- * @param {HTMLElement} form - The form element to append the select element to.
- * @param {Array} markers - The array of Leaflet markers to filter.
- * @param {Object} parsedData - The parsed GeoJSON data.
- * @param {L.markerClusterGroup} markerClusterGroup - The Leaflet marker cluster group.
- * @param {L.Map} map - The Leaflet map object.
-*/
+ * Creates a filter bar to select types of tiers-lieux and services.
+ * @param {HTMLFormElement} form - The form element to add the filter bar to.
+ * @param {L.Marker[]} markers - The markers to filter.
+ * @param {Object} parsedData - The parsed data containing information about the tiers-lieux.
+ * @param {L.MarkerClusterGroup} markerClusterGroup - The marker cluster group containing the markers.
+ * @param {L.Map} map - The map to filter.
+ */
 function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
     form.innerHTML = `<div id="typePlaceForm">
-                        <div class="select-selected">Sélectionner les types de tiers-lieux</div>
+                        <div class="select-selected">Quels types de tiers-lieux recherchez-vous ? + </div>
                         <div class="select-items select-hide"> 
                             <div class="option">
                                 <span class="name-selected-items">Tous les types de Tiers-lieux</span>
                                 <input type="checkbox" name="typePlace[]" id="all" value="all" checked>
                             </div>
                         </div>
+                    </div>
+                    <div id="servicesForm">
+                        <div class="select-selected">Quels services recherchez-vous ? + </div>
+                        <div class="select-items select-hide"> 
+                            <div class="option">
+                                <span class="name-selected-items">Tous les services</span>
+                                <input type="checkbox" name="typePlace[]" id="all" value="all" checked>
+                            </div>
+                        </div>
                     </div>`;
 
     let typePlaceForm = document.getElementById("typePlaceForm");
-    let typePlaceItem = document.querySelector('.select-items');
+    let servicesForm = document.getElementById("servicesForm");
+    let typePlaceItem = typePlaceForm.querySelector('.select-items');
+    let servicesItem = servicesForm.querySelector('.select-items');
+
     let typePlacePresent = ['all'];
+    let servicePresent = ['all'];
     let features = parsedData.features
 
     for (let tiersLieux of features) {
         let typePlace = tiersLieux.properties.complement_info.typePlace;
+        let services = tiersLieux.properties.complement_info.services;
+        console.log(services);
         for (let typePlaceName of typePlace) {
             if ((!typePlacePresent.includes(typePlaceName)) && typePlaceName !== "") {
                 typePlaceItem.innerHTML += `<div class="option">
@@ -99,58 +117,88 @@ function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
                 typePlacePresent.push(typePlaceName);
             }
         }
+
+        for (let service of services) {
+            if ((!servicePresent.includes(service)) && service !== "") {
+                servicesItem.innerHTML += `<div class="option">
+                                                <span class="name-selected-items">` + service + `</span>
+                                                <input type="checkbox" id="` + service + `" class="type-place-option" value="` + service + `">
+                                            </div>`;
+                servicePresent.push(service);
+            }
+        }
     }
 
     typePlaceForm.addEventListener("change", () => {
         const checkboxes = typePlaceForm.querySelectorAll('input[type="checkbox"]');
         const listItems = list.querySelectorAll(".card");
         const typePlaceSelected = [];
+        const all = document.querySelector('#typePlaceForm .select-items #all')
 
         checkboxes.forEach(checkbox => {
             if (checkbox.checked) {
                 typePlaceSelected.push(checkbox.value);
             }
         })
+        /** 
+         * Si autre que all est checked
+         *  retirer le checked à all
+         * Si all est chequer 
+         *  retirer le chacked à toutes les autres.
+        */
 
         markerClusterGroup.clearLayers();
         filteredMapAndList(markers, typePlaceSelected, listItems, markerClusterGroup);
     });
-    // Ouverture et fermeture de la liste déroulante
-    document.querySelector('.select-selected').addEventListener('click', function () {
-        if (document.querySelector('.select-items').classList.contains('select-hide')) {
-            document.querySelector('.select-items').classList.remove('select-hide');
+
+    // Ouverture et fermeture de la liste déroulante typePlace
+    const selectedTypePlace = document.querySelector('#typePlaceForm .select-selected');
+    selectedTypePlace.addEventListener('click', function () {
+        const selectedTypePlaceItems = document.querySelector('.select-items');
+        if (selectedTypePlaceItems.classList.contains('select-hide')) {
+            selectedTypePlaceItems.classList.remove('select-hide');
         } else {
-            document.querySelector('.select-items').classList.add('select-hide');
+            selectedTypePlaceItems.classList.add('select-hide');
+        }
+    });
+    // Ouverture et fermeture de la liste déroulante typePlace
+    const selectedServices = document.querySelector('#servicesForm .select-selected');
+    selectedServices.addEventListener('click', function () {
+        const selectedServicesItems = document.querySelector('#servicesForm .select-items');
+        if (selectedServicesItems.classList.contains('select-hide')) {
+            selectedServicesItems.classList.remove('select-hide');
+        } else {
+            selectedServicesItems.classList.add('select-hide');
         }
     });
 }
 /**
  * Create a list of elements and markers on the map
  * @param {L.markerClusterGroup} markerClusterGroup - The marker group for the map
-        * @param {Object} parsedData - The parsed data for the tiers
-        *
-        * The content object contains all the information about a location
-        * @typedef {Object} content
-        * @property {number} lat – The latitude of the location
-        * @property {number} long – The longitude of the location
-        * @property {string} name – The name of the location
-        * @property {Object} address – The address of the location
-        * @property {string} address.street - The street of the location
-        * @property {string} adress.code - The postal code of the Offsite
-        * @property {string} adress.city - The city of the co-location
-        * @property {Object} contact – The contact information of the shop
-        * @property {string} contact.tel - The phone number of the shop
-        * @property {string} contact.email - The email address of the shop
-        * @property {string} contact.webSite - The website of the shop
-        * @property {Object} socialMedia - The links to the social networks of the shop
-        * @property {string} socialMedia.url1 – The first social network link
-        * @property {string} socialMedia.url2 – The second social network link
-        * @property {string} socialMedia.url3 – The third social network link
-        * @property {string} socialMedia.url4 – The fourth social network link
-        * @property {string} desc - The short description of the third place
-        * @property {string} accessibility – The accessibility of the third-party venue
-        * @property {string} typePlace - The type of the location
-        */
+* @param {Object} parsedData - The parsed data for the tiers
+*
+* The content object contains all the information about a location
+* @typedef {Object} content
+* @property {number} lat – The latitude of the location
+* @property {number} long – The longitude of the location
+* @property {string} name – The name of the location
+* @property {Object} address – The address of the location
+* @property {string} address.street - The street of the location
+* @property {string} adress.code - The postal code of the Offsite
+* @property {string} adress.city - The city of the co-location
+* @property {Object} contact – The contact information of the shop
+* @property {string} contact.tel - The phone number of the shop
+* @property {string} contact.email - The email address of the shop
+* @property {string} contact.webSite - The website of the shop
+* @property {Object} socialMedia - The links to the social networks of the shop
+* @property {string} socialMedia.url1 – The first social network link
+* @property {string} socialMedia.url2 – The second social network link
+* @property {string} socialMedia.url3 – The third social network link
+* @property {string} socialMedia.url4 – The fourth social network link
+* @property {string} desc - The short description of the third place
+* @property {string} accessibility – The accessibility of the third-party venue
+* @property {string} typePlace - The type of the location
+*/
 function createListAndMapElement(markerClusterGroup, parsedData) {
     for (let tiersLieux of parsedData.features) {
         //content = object contains the tiers-lieux's content
