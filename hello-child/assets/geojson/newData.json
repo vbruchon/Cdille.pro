@@ -6,56 +6,56 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    4.833293,
-                    45.764043
+                    5.023504826364983,
+                    44.72840627376607
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 1,
-                    "identifiant_metier": "TL001",
                     "etat": "actif",
-                    "nom_long": "Espace Coworking",
-                    "nom_court": "Coworking",
-                    "alias_generique": "Le Cowork"
+                    "nom_long": "8 Fablab",
+                    "nom_court": "8 Fablab",
+                    "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "3 Rue du Pont",
+                    "adresse": "Rue Courre Commère",
                     "complement_adresse": "",
-                    "code_postal": "69002",
-                    "commune": "Lyon",
-                    "code_INSEE_commune": "69123",
-                    "telephone": "04 72 12 34 56",
+                    "code_postal": "26400",
+                    "commune": "Crest",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 55 14 78",
                     "telephone_special": "",
                     "mobile": "",
-                    "mail": "contact@cowork.com",
-                    "site_internet": "https://www.cowork.com"
+                    "mail": "contact@8fablab.fr",
+                    "site_internet": "https://www.8fablab.fr"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/cowork",
-                    "reseau_social_2": "https://www.linkedin.com/ctest",
-                    "reseau_social_3": "https://www.twitter.com/cowork",
-                    "reseau_social_4": "https://www.instagram.com/cowork",
+                    "reseau_social_1": "https://twitter.com/8Drome",
+                    "reseau_social_2": "https://www.facebook.com/8fablab/?locale=fr_FR",
+                    "reseau_social_3": "https://www.linkedin.com/company/8fablab/",
+                    "reseau_social_4": "https://www.instagram.com/8fablab/?hl=fr",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.cowork.com/photos/cowork-lyon.jpg",
-                    "credit_photo": "John Doe",
-                    "logo_url": "https://www.cowork.com/logo/cowork-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": "https://www.8fablab.fr/images/interface/logo.png"
                 },
                 "complement_info": {
-                    "descriptif_court": "Espace de coworking situé dans le quartier de la Presqu'île",
-                    "descriptif_long": "Le Cowork est un espace de travail partagé ouvert aux indépendants, entrepreneurs et travailleurs nomades. Nous proposons des espaces de travail flexibles, des salles de réunion, des événements et une communauté dynamique.",
+                    "descriptif_court": "Le 8 Fablab est un lieu pour créer, prototyper, fabriquer ou encore réparer tous types d'objets",
+                    "descriptif_long": "Atelier de fabrication numérique ouvert à tous, le 8 Fablab est un lieu pour créer, prototyper, fabriquer ou encore réparer tous types d'objets. Au plein coeur de Crest, le 8 est aussi un espace de coworking pouvant accueillir une vingtaine de coworkers et propose des salles de formation. ",
                     "statut": "Association",
-                    "classification": "Coworking",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "French Tech"
+                    "classification": "Tiers-lieu",
+                    "typePlace": [
+                        "Fablab",
+                        "Coworking"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Ateliers artisanaux partagés"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-03-01",
-                    "MAJ_Qui": "John Doe"
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
                 }
             }
         },
@@ -64,55 +64,56 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    5.727883,
-                    45.190533
+                    5.1387249110057756,
+                    44.36216124311474
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 2,
-                    "identifiant_metier": "TL002",
                     "etat": "actif",
-                    "nom_long": "La Ruche Numérique",
-                    "nom_court": "La Ruche",
+                    "nom_long": "Asoft",
+                    "nom_court": "",
                     "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "7 Rue des Capucins",
-                    "complement_adresse": "",
-                    "code_postal": "73000",
-                    "commune": "Chambéry",
-                    "code_INSEE_commune": "73065",
-                    "telephone": "04 79 60 34 56",
+                    "adresse": "11 place de la Libération",
+                    "complement_adresse": "La Vitrine",
+                    "code_postal": "26110",
+                    "commune": "Nyons",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 27 72 96",
                     "telephone_special": "",
                     "mobile": "",
-                    "mail": "contact@laruchenum.com",
-                    "site_internet": "https://www.laruchenum.com"
+                    "mail": "asso@asoft-nyons.net ",
+                    "site_internet": "www.asoft-nyons.net"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/laruchenum",
-                    "reseau_social_2": "",
-                    "reseau_social_3": "",
+                    "reseau_social_1": "https://twitter.com/AsoftNyons26",
+                    "reseau_social_2": "https://www.facebook.com/8fablab/?locale=fr_FR",
+                    "reseau_social_3": "https://www.linkedin.com/company/asoft-nyons/",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.laruchenum.com/photos/ruche-numerique-chambery.jpg",
-                    "credit_photo": "Jane Doe",
-                    "logo_url": "https://www.laruchenum.com/logo/ruche-numerique-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": "https://i0.wp.com/www.asoft-nyons.net/wordpress/wp-content/uploads/2017/01/cropped-logoH100.png?fit=200%2C100&ssl=1"
                 },
                 "complement_info": {
-                    "descriptif_court": "Tiers-lieu dédié aux entreprises et indépendants du numérique",
-                    "descriptif_long": "La Ruche Numérique est un espace de travail partagé pour les professionnels du numérique. Nous proposons des bureaux équipés, des salles de réunion, un accès internet haut débit et une communauté dynamique.",
-                    "statut": "Société",
-                    "classification": "Tiers-lieu numérique",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap visuel",
-                    "labels": [
-                        "French Tech"
+                    "descriptif_court": "Associaiton qui est un espace publique Numérique, une maison France Services et un centre de conseil/formation au numérique",
+                    "descriptif_long": "L’association ASOFT est à la fois un Espace Public Numérique, une Maison France Services et un centre de conseils et de formations au numérique. Elle propose de nombreux cours et ateliers, destinés tant aux particuliers qu’aux professionnels.",
+                    "statut": "Association",
+                    "classification": "Tiers-lieu",
+                    "typePlace": [
+                        "Espace Publique Numérique",
+                        "Maison France Services"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Accompagnement des publics",
+                        "Formation"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-04-11",
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
@@ -122,55 +123,56 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    5.0605,
-                    45.5375
+                    5.328412869237482,
+                    45.02736043247098
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 3,
-                    "identifiant_metier": "TL002",
                     "etat": "actif",
-                    "nom_long": "FabLab Grenoble",
-                    "nom_court": "FabLab",
-                    "alias_generique": "Le Fab"
+                    "nom_long": "La Place des Possibles",
+                    "nom_court": "",
+                    "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "2 Rue des Arts et Métiers",
+                    "adresse": "220 route de l'Arps",
                     "complement_adresse": "",
-                    "code_postal": "38000",
-                    "commune": "Grenoble",
-                    "code_INSEE_commune": "38185",
-                    "telephone": "04 76 12 34 56",
+                    "code_postal": "26190",
+                    "commune": "Saint-Laurent en Royans",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 27 72 96",
                     "telephone_special": "",
                     "mobile": "",
-                    "mail": "contact@fablab-grenoble.fr",
-                    "site_internet": "https://www.fablab-grenoble.fr"
+                    "mail": "contact@association-tracols.fr",
+                    "site_internet": "https://association-tracols.fr"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/fablabgrenoble",
-                    "reseau_social_2": "https://twitter.com/fablabgrenoble",
+                    "reseau_social_1": "https://www.facebook.com/Laplacedespossibles/",
+                    "reseau_social_2": "",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.fablab-grenoble.fr/wp-content/uploads/2022/03/fablab-grenoble.jpg",
-                    "credit_photo": "Jane Doe",
-                    "logo_url": "https://www.fablab-grenoble.fr/wp-content/uploads/2022/03/fablab-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": "https://www.association-tracols.fr/templates/g5_helium/custom/images/tracols-logo.png"
                 },
                 "complement_info": {
-                    "descriptif_court": "Espace de fabrication numérique et d'apprentissage",
-                    "descriptif_long": "Le FabLab Grenoble est un espace de fabrication numérique qui propose des machines et outils pour la création et la prototypage de projets. Nous proposons également des formations et des ateliers pour apprendre à utiliser les outils et développer des compétences en fabrication numérique.",
+                    "descriptif_court": "Espace convivial et propice à l'expérimentation et l'innovation sociale, formative, et de fabrication",
+                    "descriptif_long": "La Place des Possibles, tiers lieu, est installée dans une ancienne usine de tissage. Elle réunit différents acteurs proposant aux habitants des biens et des services dans les dommaines du numérique, de la culture, du ré emploi, de la construction bois/métal, ... C'est un espace convivial et propice à l'expérimentation et l'innovation sociale, formative, et de fabrication...  ",
                     "statut": "Association",
-                    "classification": "FabLab",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "French Fab"
+                    "classification": "Tiers-lieu",
+                    "typePlace": [
+                        "Tiers Lieu",
+                        "Manufacture de Proximité"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Accompagnement des publics",
+                        "Formation"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-04-05",
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
@@ -180,56 +182,58 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    5.064605,
-                    44.957769
+                    5.485017569781734,
+                    44.27824033948666
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 4,
-                    "identifiant_metier": "TL002",
-                    "etat": "actif",
-                    "nom_long": "La Ruche Drôme",
-                    "nom_court": "La Ruche",
+                    "etat": "en cours de montage",
+                    "nom_long": "Association Projet Clochette",
+                    "nom_court": "",
                     "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "3 Rue des Martyrs",
+                    "adresse": "La Combe",
                     "complement_adresse": "",
-                    "code_postal": "26000",
-                    "commune": "Valence",
-                    "code_INSEE_commune": "26362",
-                    "telephone": "04 75 12 34 56",
+                    "code_postal": "26170",
+                    "commune": "Montauban-sur-l'Ouvèze",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
                     "telephone_special": "",
-                    "mobile": "",
-                    "mail": "contact@laruche-drome.com",
-                    "site_internet": "https://www.laruche-drome.com"
+                    "mobile": "06 79 30 03 98",
+                    "mail": "projet.clochette@gmail.com",
+                    "site_internet": "www.projet-clochette.fr"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/laruchedrome",
-                    "reseau_social_2": "https://www.instagram.com/laruche_drome/",
+                    "reseau_social_1": "https://www.facebook.com/projetclochette",
+                    "reseau_social_2": "",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.laruche-drome.com/wp-content/uploads/2023/04/la-ruche-drome.jpg",
-                    "credit_photo": "Jane Doe",
-                    "logo_url": "https://www.laruche-drome.com/wp-content/uploads/2023/04/logo-ruche-drome.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_100/7882525/447504_215059.png"
                 },
                 "complement_info": {
-                    "descriptif_court": "Un lieu de travail collaboratif et solidaire",
-                    "descriptif_long": "La Ruche Drôme est un espace de coworking qui met à disposition des bureaux partagés, une salle de réunion, une cuisine, un espace détente et un jardin. Nous proposons également des événements, des formations et un accompagnement pour les porteurs de projets. La Ruche Drôme est une association qui encourage la solidarité, la créativité et l'innovation sociale.",
+                    "descriptif_court": "Espace de convivialité, de lien social et de services de proximité (épicerie, bar, cantine, numérique...)",
+                    "descriptif_long": "La clochette est un projet associatif de reprise de l'épicerie historique du village, pour en faire un espace de convivialité, de lien social et d'accès à des services de proximité : épicerie, bar, cantine, numérique",
                     "statut": "Association",
-                    "classification": "Coworking",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "French Impact"
+                    "classification": "Tiers-lieu",
+                    "typePlace": [
+                        "Cuisine partagée / Foodlab"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Épicerie",
+                        "Bar",
+                        "Cantine",
+                        "Espace Numérique"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2023-04-11",
-                    "MAJ_Qui": "ChatGPT"
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
                 }
             }
         },
@@ -238,55 +242,56 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    4.97196,
-                    44.96428
+                    5.264340869288128,
+                    44.47471073558268
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 5,
-                    "identifiant_metier": "TL002",
                     "etat": "actif",
-                    "nom_long": "Le Moulin Digital",
-                    "nom_court": "Moulin Digital",
+                    "nom_long": "Aventic",
+                    "nom_court": "",
                     "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "42 Rue du Moulin",
+                    "adresse": "285 Le Village",
                     "complement_adresse": "",
-                    "code_postal": "26300",
-                    "commune": "Alixan",
-                    "code_INSEE_commune": "26006",
-                    "telephone": "04 75 79 91 15",
+                    "code_postal": "26510",
+                    "commune": "Sahune",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 27 02 02",
                     "telephone_special": "",
                     "mobile": "",
-                    "mail": "contact@moulindigital.com",
-                    "site_internet": "https://www.moulindigital.com"
+                    "mail": "animation@aventic.org",
+                    "site_internet": "www.aventic.org"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/moulindigital",
-                    "reseau_social_2": "https://twitter.com/moulindigital",
+                    "reseau_social_1": "https://www.facebook.com/aventic.baronnies/",
+                    "reseau_social_2": "",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.moulindigital.com/photos/moulin-digital-alixan.jpg",
-                    "credit_photo": "Jane Doe",
-                    "logo_url": "https://www.moulindigital.com/logo/moulin-digital-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
                 },
                 "complement_info": {
-                    "descriptif_court": "Espace de coworking et incubateur numérique",
-                    "descriptif_long": "Le Moulin Digital est un espace de coworking et un incubateur numérique situé dans la Drôme, à proximité de Valence. Nous proposons des bureaux partagés, des salles de réunion et un accompagnement personnalisé pour les entrepreneurs et les startups du numérique. Notre communauté est dynamique et diversifiée, avec des profils variés et complémentaires.",
-                    "statut": "SARL",
-                    "classification": "Coworking et incubateur numérique",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "French Tech"
+                    "descriptif_court": "Associaiton qui met à disposition un accès adapté et facile aux pratique du numérique",
+                    "descriptif_long": "Aventic est une association dont le but est de mettre à la disposition de tous les habitants un accès facilité et adapté aux pratiques numériques. On vous propose également de se déplacer avec du matériel sur l’ensemble du territoire et ses alentours pour des animations ludiques.",
+                    "statut": "Association",
+                    "classification": "",
+                    "typePlace": [
+                        "Espace Publique Numérique",
+                        "Maison France Services"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Accompagnement des publics",
+                        "Médiation numérique"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-05-15",
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
@@ -296,55 +301,54 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    4.753605,
-                    44.562166
+                    5.0654933705359575,
+                    44.52326390507951
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 6,
-                    "identifiant_metier": "TL004",
                     "etat": "actif",
-                    "nom_long": "La Ruche Montélimar",
-                    "nom_court": "La Ruche",
-                    "alias_generique": "Ruche Montélimar"
+                    "nom_long": "Bubble effect",
+                    "nom_court": "",
+                    "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "12 Rue Pierre Julien",
+                    "adresse": "Passage des joly dames",
                     "complement_adresse": "",
-                    "code_postal": "26200",
-                    "commune": "Montélimar",
-                    "code_INSEE_commune": "26198",
-                    "telephone": "04 75 01 02 03",
+                    "code_postal": "26220",
+                    "commune": "Dieulefit",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
                     "telephone_special": "",
-                    "mobile": "",
-                    "mail": "contact@laruche-montelimar.com",
-                    "site_internet": "https://www.laruche-montelimar.com"
+                    "mobile": "06 82 28 08 66",
+                    "mail": "contact@bubble-effect.fr",
+                    "site_internet": ""
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/laruche.montelimar",
-                    "reseau_social_2": "https://twitter.com/laruchemontel",
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.laruche-montelimar.com/photos/ruche-montelimar.jpg",
-                    "credit_photo": "Jane Doe",
-                    "logo_url": "https://www.laruche-montelimar.com/logo/ruche-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
                 },
                 "complement_info": {
-                    "descriptif_court": "Espace de coworking et d'innovation sociale",
-                    "descriptif_long": "La Ruche Montélimar est un tiers-lieu dédié à l'innovation sociale et à l'entrepreneuriat. Nous proposons des espaces de coworking, des ateliers de formation, des événements et un accompagnement personnalisé pour les porteurs de projets.",
-                    "statut": "Association",
-                    "classification": "Coworking et innovation sociale",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "ESS"
+                    "descriptif_court": "",
+                    "descriptif_long": "",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        ""
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-05-15",
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
@@ -354,53 +358,54 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    4.687283,
-                    44.935235
+                    4.8906357944246,
+                    44.89404593142656
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 7,
-                    "identifiant_metier": "TL004",
                     "etat": "actif",
-                    "nom_long": "La Coopérative de l'Arche",
-                    "nom_court": "Coopérative Arche",
-                    "alias_generique": "L'Arche"
+                    "nom_long": "BuroClub Valence",
+                    "nom_court": "",
+                    "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "1 Rue de l'Arche",
+                    "adresse": "105 rue des mourettes",
                     "complement_adresse": "",
-                    "code_postal": "07200",
-                    "commune": "Aubenas",
-                    "code_INSEE_commune": "07019",
-                    "telephone": "04 75 89 12 34",
+                    "code_postal": "26000",
+                    "commune": "Valence",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 81 09 02 03",
                     "telephone_special": "",
                     "mobile": "",
-                    "mail": "contact@arche.coop",
-                    "site_internet": "https://www.arche.coop"
+                    "mail": "valence@buro.com",
+                    "site_internet": "https://www.buro.com/centre-affaires/valence-250/"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/arche.coop",
-                    "reseau_social_2": "",
+                    "reseau_social_1": "https://www.facebook.com/BUROCLUBVALENCE",
+                    "reseau_social_2": "https://www.linkedin.com/company/buro-club-valence/?viewAsMember=true",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.arche.coop/photos/arche-aubenas.jpg",
-                    "credit_photo": "Jane Doe",
-                    "logo_url": "https://www.arche.coop/logo/arche-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
                 },
                 "complement_info": {
-                    "descriptif_court": "Coopérative d'activités et d'emploi",
-                    "descriptif_long": "L'Arche est une coopérative d'activités et d'emploi située à Aubenas. Nous accompagnons les porteurs de projets dans le lancement de leur entreprise en leur proposant un statut juridique et une gamme de services pour se développer.",
-                    "statut": "Coopérative",
-                    "classification": "Coopérative d'activités",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [],
-                    "observations_internes": ""
+                    "descriptif_court": "Espace de coworking au sud de Valence",
+                    "descriptif_long": "Situé au sud de Valence, à 2 min de l'échangeur A7, BURO Club e propose des solutions clé en main: Bureaux permanents, Domiciliation d’Entreprise, Location de salles de réunion, Un espace de Coworking. Nos + : Synergie, évènements, Réseau international",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        ""
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-05-15",
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
@@ -410,56 +415,111 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    6.074740,
-                    45.075025
+                    4.865644616816417,
+                    44.76054113318126
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 7,
+                    "etat": "actif",
+                    "nom_long": "La Cartonnerie",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "290 Boulevard de Provence",
+                    "complement_adresse": "",
+                    "code_postal": "26450",
+                    "commune": "Cléon D'Andran",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 90 72 75",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "contact@lacartonnerie-cleon.fr",
+                    "site_internet": "https://lacartonnerie-cleon.fr/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/lacartonnerie.cleon",
+                    "reseau_social_2": "https://www.instagram.com/la.cartonnerie.cleon/",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "Lieu polyvalent pour café, coworking, activités de groupe et concerts, dédié à la communauté locale et à ses projets.",
+                    "descriptif_long": "La cartonnerie est une maison de village transformée pour accueillir un café/cantine, des bureaux de coworking, une salle d'activités de groupe et des soirées/concerts dans la cour. Ce lieu est dédié aux locaux et à leurs projets !",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        "Cantine"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.196863098041477,
+                    44.2782457390675
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 8,
-                    "identifiant_metier": "TL006",
-                    "etat": "actif",
-                    "nom_long": "La Coopérative des Possibles",
-                    "nom_court": "Coopérative",
-                    "alias_generique": "La Coop"
+                    "etat": "en cours de montage",
+                    "nom_long": "Le Champs des A.",
+                    "nom_court": "",
+                    "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "12 Rue des Moulins",
+                    "adresse": "",
                     "complement_adresse": "",
-                    "code_postal": "07100",
-                    "commune": "Annonay",
-                    "code_INSEE_commune": "07010",
-                    "telephone": "04 75 33 28 27",
+                    "code_postal": "26170",
+                    "commune": "Propiac",
+                    "code_INSEE_commune": "",
+                    "telephone": "06 87 04 60 75",
                     "telephone_special": "",
                     "mobile": "",
-                    "mail": "contact@lacoop.fr",
-                    "site_internet": "https://www.lacoop.fr"
+                    "mail": "lechampdesa@gmail.com",
+                    "site_internet": ""
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/lacoop",
-                    "reseau_social_2": "https://www.instagram.com/lacoop",
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.lacoop.fr/photos/cooperative-annonay.jpg",
-                    "credit_photo": "Jane Doe",
-                    "logo_url": "https://www.lacoop.fr/logo/cooperative-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
                 },
                 "complement_info": {
-                    "descriptif_court": "Espace de travail partagé et incubateur de projets",
-                    "descriptif_long": "La Coop est un tiers-lieu situé à Annonay en Ardèche. Nous proposons un espace de travail partagé, une incubation de projets et une programmation culturelle. Nous sommes engagés dans une démarche d'économie sociale et solidaire et favorisons les collaborations entre acteurs locaux.",
-                    "statut": "Coopérative d'activités et d'emploi",
-                    "classification": "Tiers-lieu",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "French Impact",
-                        "ESUS"
+                    "descriptif_court": "",
+                    "descriptif_long": "Projet collectif visant à reconnecter Alimentation et Agriculture. Des outils de transformation alimentaire, une cantine d'application, une antenne Recherche/Innovation/Formation, un espace de services",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Tiers-lieu Agricole"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Cantine"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-02-28",
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
@@ -469,56 +529,54 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    5.049066573629237,
-                    45.038746713180025
+                    5.295425882183878,
+                    44.69472493295177
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 9,
-                    "identifiant_metier": "TL006",
                     "etat": "actif",
-                    "nom_long": "La Ruche",
-                    "nom_court": "La Ruche",
+                    "nom_long": "La CoConnerie",
+                    "nom_court": "",
                     "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "26 Rue de la République",
+                    "adresse": "2953 route d'Aurel",
                     "complement_adresse": "",
-                    "code_postal": "26000",
-                    "commune": "Valence",
-                    "code_INSEE_commune": "26362",
-                    "telephone": "04 75 12 34 56",
+                    "code_postal": "26340",
+                    "commune": "Aurel",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
                     "telephone_special": "",
-                    "mobile": "",
-                    "mail": "contact@laruche-valence.com",
-                    "site_internet": "https://laruche-valence.com"
+                    "mobile": "06 84 48 81 44",
+                    "mail": "contact@lacoconnerie.fr",
+                    "site_internet": "https://www.lacoconnerie.fr"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/laruchevalence",
-                    "reseau_social_2": "https://twitter.com/laruchevalence",
+                    "reseau_social_1": "https://www.facebook.com/Coconnerie/",
+                    "reseau_social_2": "",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://laruche-valence.com/wp-content/uploads/2022/03/la-ruche-valence.jpg",
-                    "credit_photo": "La Ruche Valence",
-                    "logo_url": "https://laruche-valence.com/wp-content/uploads/2022/03/la-ruche-valence-logo.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
                 },
                 "complement_info": {
-                    "descriptif_court": "Espace de coworking et tiers-lieu",
-                    "descriptif_long": "La Ruche est un tiers-lieu à Valence, qui accueille des travailleurs indépendants, des entrepreneurs et des associations. Nous proposons un espace de coworking, des salles de réunion, un café, ainsi que des événements et des formations pour notre communauté.",
-                    "statut": "Association",
-                    "classification": "Coworking et tiers-lieu",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "French Impact",
-                        "B Corp"
+                    "descriptif_court": "",
+                    "descriptif_long": "Espace de création d'accueil et de partage : salle de spectacle jauge 100 spectateurs assis, gîte d'étape 12 couchages touristes et artistes en résidences, gîte 4 couchages, labo cuisine et atelier multi (et auto)-réparations avec location vélos élec",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Tiers-lieu culturel"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Offre artistique ou culturelle"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-05-10",
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
@@ -528,55 +586,1257 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -1.553194,
-                    47.216279
+                    4.752414690381468,
+                    44.55738803192529
                 ]
             },
             "properties": {
                 "identification": {
                     "identifiant_interne_SIG": 10,
-                    "identifiant_metier": "TL007",
                     "etat": "actif",
-                    "nom_long": "La Ruche",
-                    "nom_court": "La Ruche",
-                    "alias_generique": "La Ruche"
+                    "nom_long": "Convergences 26",
+                    "nom_court": "",
+                    "alias_generique": ""
                 },
                 "coordonees": {
-                    "adresse": "18 Rue Louis Le Prince Ringuet",
+                    "adresse": "2 Place Léopold Blanc",
                     "complement_adresse": "",
-                    "code_postal": "72000",
-                    "commune": "Le Mans",
-                    "code_INSEE_commune": "72181",
-                    "telephone": "02 43 12 34 56",
+                    "code_postal": "26200",
+                    "commune": "Montélimar",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
                     "telephone_special": "",
-                    "mobile": "",
-                    "mail": "contact@laruche-lemans.fr",
-                    "site_internet": "https://www.laruche-lemans.fr"
+                    "mobile": "06 95 63 50 23",
+                    "mail": "convergences26@gmx.fr",
+                    "site_internet": "https://www.convergences26.fr"
                 },
                 "communication": {
-                    "reseau_social_1": "https://www.facebook.com/LaRucheLeMans",
-                    "reseau_social_2": "https://twitter.com/LaRucheLeMans",
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
                     "reseau_social_3": "",
                     "reseau_social_4": "",
                     "reseau_social_5": "",
-                    "photo_url": "https://www.laruche-lemans.fr/wp-content/uploads/2019/07/la-ruche-le-mans-2.jpg",
-                    "credit_photo": "La Ruche",
-                    "logo_url": "https://www.laruche-lemans.fr/wp-content/uploads/2019/07/logo-ruche-300x159.png"
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
                 },
                 "complement_info": {
-                    "descriptif_court": "Espace de travail collaboratif",
-                    "descriptif_long": "La Ruche est un espace de travail collaboratif ouvert aux travailleurs indépendants, entrepreneurs et start-ups. Nous proposons des bureaux partagés, des salles de réunion et un cadre stimulant pour le développement de projets innovants.",
-                    "statut": "Association",
-                    "classification": "Espace de coworking",
-                    "nomenclature_Equipco_GT": "",
-                    "accessibilite": "Handicap moteur",
-                    "labels": [
-                        "French Tech"
+                    "descriptif_court": "Fablab associatif",
+                    "descriptif_long": "Fablab associatif de Montélimar, formation et utilisation des machines du LAB pour particuliers et entreprises, ateliers open bidouilles pour tous, organisation de Repair Café... Formations aux outils numériques de fabrication",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Fablab"
                     ],
-                    "observations_internes": ""
+                    "services": [
+                        "Formations",
+                        "Café"
+                    ]
                 },
                 "maj": {
-                    "date_MAJ": "2022-05-15",
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.974000113117495,
+                    45.0017804429492
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 11,
+                    "etat": "actif",
+                    "nom_long": "Cowork La Pépinière",
+                    "nom_court": "La pépinière",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "3 rue Charpak",
+                    "complement_adresse": "",
+                    "code_postal": "26300",
+                    "commune": "Alixan",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 75 64 00",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "accueil.pepiniere@drome.cci.fr",
+                    "site_internet": ""
+                },
+                "communication": {
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        "Pépinière d'entreprise"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.137584947579238,
+                    44.361067810372006
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 12,
+                    "etat": "actif",
+                    "nom_long": "Dissidences - Le Repère",
+                    "nom_court": "Dissidences",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "Rue des réformés",
+                    "complement_adresse": "",
+                    "code_postal": "26110",
+                    "commune": "Nyons",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 26 85 11",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "info@dissidences.fr",
+                    "site_internet": "www.dissidences.fr"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/LeRepereCoworkingNyons",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "Un grand espace partagé, salle de réunion/formation, projecteur, écran, cuisine autogérée, espace bar (café, tisanes, jus,...), WIFI, internet par câble, imprimante professionnelle",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        "Formations"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.059813634286774,
+                    44.716090926959076
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 13,
+                    "etat": "actif",
+                    "nom_long": "Eliomatekou",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "Le temple, Via augusta,",
+                    "complement_adresse": "",
+                    "code_postal": "26240",
+                    "commune": "Aouste-sur-Sye",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "07 81 41 46 08",
+                    "mail": "eliomatekou@gmail.com",
+                    "site_internet": "https://www/eliomatekou.org"
+                },
+                "communication": {
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "L'atelier partagé d'Eliomatekou est un tiers lieu naissant de 1500m² (ouverture septembre 2022) réunissant autour d'espaces et de machines mis en commun, des professionnels et des particuliers du bois et du métal. L'association accueille 25 résidents permanents et souhaite s'ouvrir à l'organisation de formations et d'événements",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Ateliers artisanaux partagés"
+                    ],
+                    "services": [
+                        "Formations"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.04185998656804,
+                    44.810543316624674
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 14,
+                    "etat": "actif",
+                    "nom_long": "Entreautre",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "41 rue Sadi Carnot",
+                    "complement_adresse": "",
+                    "code_postal": "26400",
+                    "commune": "Crest",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 81 16 01 02",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "hello@entreautre.com",
+                    "site_internet": "https://www.entreautre.com"
+                },
+                "communication": {
+                    "reseau_social_1": "https://twitter.com/entreautre",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.058306152660092,
+                    44.787596882863205
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 15,
+                    "etat": "actif",
+                    "nom_long": "Epi-centre",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "Rue Aristide Dumont",
+                    "complement_adresse": "",
+                    "code_postal": "26400",
+                    "commune": "Crest",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 75 25 14 33",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "epicentre@mairie-crest.fr",
+                    "site_internet": "https://epi-centre.fr/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/epicentre.crest",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "L’Epi-Centre est un service de la mairie de Crest créé afin de répondre aux besoins des habitants du territoire en matière d'accès et d'usages du numérique. C'est aussi un espace pour du télétravail ponctuel et un lieu d'apprentissage à distance.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.375181651059805,
+                    44.754517124168075
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 16,
+                    "etat": "actif",
+                    "nom_long": "Espace Barral",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "7 rue des Fabriques",
+                    "complement_adresse": "",
+                    "code_postal": "26150",
+                    "commune": "Die",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 28 51 00 11",
+                    "telephone_special": "",
+                    "mobile": "07 87 29 18 34",
+                    "mail": "contact@espace-barral.org",
+                    "site_internet": "https://www.espace-barral.org/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/espace.barral.coworking/",
+                    "reseau_social_2": "https://www.instagram.com/espace_barral_coworking/",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "Ouvert à différents métiers, l’Espace Barral permet de partager un lieu de travail, dans un cadre magnifique (une ancienne usine textile de plus de 800m²), en pleine nature, à 5 min à pied du centre-ville de Die. L’Espace Barral est résolument tourné vers la modernité, le télétravail, la communication numérique, l’économie collaborative…",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.818248265023229,
+                    45.445115574899226
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 17,
+                    "etat": "actif",
+                    "nom_long": "Espace Entreprises La Fabrique",
+                    "nom_court": "La Fabrique",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "1305 route de la Valloire, Le Creux de la Thine",
+                    "complement_adresse": "",
+                    "code_postal": "26140",
+                    "commune": "Albon",
+                    "code_INSEE_commune": "",
+                    "telephone": "04 27 45 20 67",
+                    "telephone_special": "",
+                    "mobile": "06 15 67 26 77",
+                    "mail": "lafabrique@portededromardeche.fr",
+                    "site_internet": "https://www.porte-de-dromardeche.fr/rubrique-4051-La-Fabrique-espace-entreprises.html?fbclid=IwAR09c0jDpP51X0R689eNAv-dSiM7vloL6my7ZQgTcM0crR_mw_ym6UN5lN4"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/laFabriqueEspaceEntreprises",
+                    "reseau_social_2": "https://www.linkedin.com/in/la-fabrique-espace-entreprises-porte-de-dromard%C3%A8che-25212a146/",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "Lieu de travail sympa, moderne et spacieux qui booste votre créativité et renforce votre réseau pro",
+                    "descriptif_long": "La Fabrique, un lieu de travail sympa, moderne et spacieux qui booste votre créativité et renforce votre réseau pro!",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        "Accompagnement individuel des entrepreneurs",
+                        "Événementiel lié à l'entrepreneuriat",
+                        "Pépinière"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.841023454778741,
+                    45.07043330742307
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 18,
+                    "etat": "actif",
+                    "nom_long": "Espace Nadi",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "34 rue Jules Nadi",
+                    "complement_adresse": "",
+                    "code_postal": "26600",
+                    "commune": "Tain l'Hermitage",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 77 14 21 52",
+                    "mail": "info@espace-nadi.fr",
+                    "site_internet": ""
+                },
+                "communication": {
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.9151710682638035,
+                    44.91900018602786
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 19,
+                    "etat": "actif",
+                    "nom_long": "Fab.T",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "26 rue Barthélémy de Laffemas",
+                    "complement_adresse": "",
+                    "code_postal": "26000",
+                    "commune": "Valence",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 12 91 47 00",
+                    "mail": "contact@fabt.fr",
+                    "site_internet": "https://www.fabt.fr"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/StartUpdeTerritoire",
+                    "reseau_social_2": "https://www.linkedin.com/company/start-up-de-territoire-valenceromans",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "Espace ressource sur les sujets d'impact environnemental, social et territorial",
+                    "descriptif_long": "La fabt est un espace ressource pour les entrepreneurs, les citoyens et les collectivités sur les sujets d'impact environnemental, social et territorial.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        ""
+                    ],
+                    "services": [
+                        "Centre de ressources"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.893538737575982,
+                    44.93421235952343
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 20,
+                    "etat": "actif",
+                    "nom_long": "Fabrico",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "7 rue Belle Image",
+                    "complement_adresse": "",
+                    "code_postal": "26000",
+                    "commune": "Valence",
+                    "code_INSEE_commune": "",
+                    "telephone": "09 73 88 49 59",
+                    "telephone_special": "",
+                    "mobile": "07 49 93 81 12",
+                    "mail": "coordination@fabrico.fr",
+                    "site_internet": "http://fabrico.fr/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/Fabricovalence",
+                    "reseau_social_2": "https://www.instagram.com/fabricovalence/",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "Tiers-lieu pour tous, composé d'un Fablab, un Espace Public Numérique, des espaces de travail et des ateliers partagés",
+                    "descriptif_long": "Tiers-lieu pour tous, composé d'un Fablab, un Espace Public Numérique, des espaces de travail et des ateliers partagés",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Fablab",
+                        "Espace Publique Numérique",
+                        "Coworking"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.217276723654509,
+                    45.06122232486704
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 21,
+                    "etat": "actif",
+                    "nom_long": "L'Artisanoscope",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "301 cote simon",
+                    "complement_adresse": "",
+                    "code_postal": "26730",
+                    "commune": "La Baume d'Hostun",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "07 52 08 04 08",
+                    "mail": "gestion@lartisanoscope.fr",
+                    "site_internet": "https://www.lartisanoscope.fr/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/Lartisanoscope",
+                    "reseau_social_2": "https://www.linkedin.com/company/l-artisanoscope/?viewAsMember=true",
+                    "reseau_social_3": "https://www.instagram.com/lartisanoscope/?hl=es",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "Groupement d'artisans proposé des boutiques et ateliers artisanaux",
+                    "descriptif_long": "L'artisanoscope est un groupement d'artisans d'art, nous mettons en commun des boutiques et un tiers lieu d'ateliers partagés pour profiter à la co-création, l'inspiration mutuelle et la transmission des savoirs-faires.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Ateliers artisanaux partagés"
+                    ],
+                    "services": [
+                        "Ateliers",
+                        "Boutiques"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.370802025326031,
+                    44.7522333992425
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 22,
+                    "etat": "actif",
+                    "nom_long": "L'Avant Poste",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "3 rue Notre-Dame",
+                    "complement_adresse": "",
+                    "code_postal": "26150",
+                    "commune": "Die",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 60 21 37 23",
+                    "mail": "contact@avant-poste.org",
+                    "site_internet": "https://avant-poste.org/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/lavantposte.tierslieu.die",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "Tiers-lieu qui accuille, valorise et favorise les inititatives liées à la transition écologique et sociale.",
+                    "descriptif_long": "La mission de l’Avant Poste est d’accueillir, de valoriser et de favoriser les initiatives liées à la transition écologique et sociale. 40 places de coworking, 4 logements, et un restaurant en plein coeur de Die.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        "Restaurant"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.0304508701076545,
+                    44.72729296307791
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 23,
+                    "etat": "actif",
+                    "nom_long": "L'Usine vivante",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "24 av Adrien Fayolle",
+                    "complement_adresse": "",
+                    "code_postal": "26400",
+                    "commune": "Crest",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "07 69 19 82 51",
+                    "mail": "contact@usinevivante.org",
+                    "site_internet": "https://www.usinevivante.org/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://twitter.com/UsineVivante",
+                    "reseau_social_2": "https://www.facebook.com/search/top?q=l%27usine%20vivante",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "L’Usine Vivante est née à Crest (Drôme) en 2015 avec plusieurs objectifs : Contribuer au développement social, culturel et économique local  en valorisant un patrimoine industriel et développer un lieu de partage des savoirs(-faire)",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.141164566386774,
+                    44.36392060688354
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 24,
+                    "etat": "actif",
+                    "nom_long": "La Baronne",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "26 rue Pierre Toesca",
+                    "complement_adresse": "",
+                    "code_postal": "26110",
+                    "commune": "Nyons",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 26 18 05 59",
+                    "mail": "asso@labaronne.org",
+                    "site_internet": "https://labaronne.org"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.linkedin.com/company/la-baronne-baronnies-provencales/",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "Réseau coopérant, centre de ressources, agence culturelle : plateforme territoriale coopérative de développement culturel en Baronnies provençales, visant à valoriser et fédérer les différents faiseurs.euses de cultures.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Tiers-lieu culturel"
+                    ],
+                    "services": [
+                        "Centre de ressources"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.194195941270168,
+                    44.69438351943875
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 25,
+                    "etat": "actif",
+                    "nom_long": "La Locomotive",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "Gare de Saillans",
+                    "complement_adresse": "",
+                    "code_postal": "26340",
+                    "commune": "Saillans",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "garedesaillans26@gmail.com",
+                    "site_internet": ""
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/collectif.Locomotive",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        "Restaurant"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.9205672259362245,
+                    44.92617479152435
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 26,
+                    "etat": "actif",
+                    "nom_long": "La Place Valence",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "30 rue Géorges Méliès",
+                    "complement_adresse": "",
+                    "code_postal": "26000",
+                    "commune": "Valence",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 28 62 99 06",
+                    "mail": "aplacevalence@afpa.fr",
+                    "site_internet": ""
+                },
+                "communication": {
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "Le Tiers-lieu Numérique LA PLACE VALENCE, ouvert à tous publics, permet de former, accompagner et rendre autonome les particuliers dans leurs démarches administratives à travers un accompagnement individuel ou collectif (via le dispositif du Pass Numérique, tout Dromois majeur peut être former de 5 à 40 h gratuitement lors d'ateliers collectifs). C'est également un lieu de rencontres, d'échanges, de co-working et de co-learning. Possibilité de louer des salles pour les professionnels et mise à disposition d'ordinateurs en libre-service.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Espace Publique Numérique"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.0173705605159205,
+                    44.90240969388377
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 27,
+                    "etat": "actif",
+                    "nom_long": "La Roue",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "8 rue Mazet",
+                    "complement_adresse": "",
+                    "code_postal": "26120",
+                    "commune": "Chabeuil",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 38 21 50 39",
+                    "mail": "contact@tierslieularoue.fr",
+                    "site_internet": "https://www.tierslieularoue.fr"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/tierslieularoue",
+                    "reseau_social_2": "https://www.instagram.com/tierslieularoue",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "La Roue rassemble les initiatives locales pour offrir aux enfants et adultes des activités d'éveil artitistique et économique.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Tiers-lieu culturel"
+                    ],
+                    "services": [
+                        "Offre artistique ou culturelle"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.752363839411676,
+                    44.55779743510758
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 28,
+                    "etat": "actif",
+                    "nom_long": "LaboM",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "7, Place Léopold Blanc",
+                    "complement_adresse": "",
+                    "code_postal": "26200",
+                    "commune": "Montélimar",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 67 78 89 09",
+                    "mail": "fabrice@caeprisme.com",
+                    "site_internet": "https://www.labo-m.info"
+                },
+                "communication": {
+                    "reseau_social_1": "https://twitter.com/LaboM26",
+                    "reseau_social_2": "https://www.facebook.com/LaboM26/?locale=fr_FR",
+                    "reseau_social_3": "https://www.instagram.com/labom26/?hl=fr",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "Accompagnement individuel des entrepreneurs",
+                    "descriptif_long": "Accompagnement individuel des entrepreneurs",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        ""
+                    ],
+                    "services": [
+                        "Coopérative d’Activités et d’Emploi / Groupement d’employeur"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.195790979762331,
+                    44.69513020689521
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 29,
+                    "etat": "actif",
+                    "nom_long": "Le36",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "50 route de la Gare",
+                    "complement_adresse": "",
+                    "code_postal": "26340",
+                    "commune": "Saillans",
+                    "code_INSEE_commune": "",
+                    "telephone": "09 73 14 74 41",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "contact@le36.in",
+                    "site_internet": "https://le36.in"
+                },
+                "communication": {
+                    "reseau_social_1": "",
+                    "reseau_social_2": "",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Coworking"
+                    ],
+                    "services": [
+                        "Événements"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.2154703701224445,
+                    45.05919690785887
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 30,
+                    "etat": "actif",
+                    "nom_long": "Le Chalutier",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "301 cote Simon",
+                    "complement_adresse": "",
+                    "code_postal": "26730",
+                    "commune": "La Baume d'Hostun",
+                    "code_INSEE_commune": "",
+                    "telephone": "06 64 63 69 44",
+                    "telephone_special": "",
+                    "mobile": "",
+                    "mail": "gestion@lechalutier.org",
+                    "site_internet": "https://lechalutier.org/"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/lechalu",
+                    "reseau_social_2": "https://www.linkedin.com/company/le-chaluttier/?viewAsMember=true",
+                    "reseau_social_3": "https://www.instagram.com/tierslieuchalutier/",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "Le Chalutier est un tiers-lieu rural qui regroupe de nombreux acteurs souhaitant travailler sur place et inventer un lieu propice à l'expérimentation d'un nouveau modèle de société.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Ateliers artisanaux partagés"
+                    ],
+                    "services": [
+                        ""
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
+                    "MAJ_Qui": "Jane Doe"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.938080295231105,
+                    44.55114592955372
+                ]
+            },
+            "properties": {
+                "identification": {
+                    "identifiant_interne_SIG": 31,
+                    "etat": "actif",
+                    "nom_long": "Le FIEF",
+                    "nom_court": "",
+                    "alias_generique": ""
+                },
+                "coordonees": {
+                    "adresse": "245 grande rue",
+                    "complement_adresse": "",
+                    "code_postal": "26160",
+                    "commune": "La Bégude de Mazenc",
+                    "code_INSEE_commune": "",
+                    "telephone": "",
+                    "telephone_special": "",
+                    "mobile": "06 44 08 97 69",
+                    "mail": "info@lefief-drome.com",
+                    "site_internet": "www.lefief-drome.com"
+                },
+                "communication": {
+                    "reseau_social_1": "https://www.facebook.com/fieflabegude",
+                    "reseau_social_2": "https://www.instagram.com/lefief.drome",
+                    "reseau_social_3": "",
+                    "reseau_social_4": "",
+                    "reseau_social_5": "",
+                    "photo_url": "",
+                    "credit_photo": "",
+                    "logo_url": ""
+                },
+                "complement_info": {
+                    "descriptif_court": "",
+                    "descriptif_long": "Le FIEF est un tiers lieu d’apprentissage, un endroit pour des séjours thématiques, des séminaires culturels et des stages artistiques, avec une dimension interculturelle et un lien fort au territoire, avec des hébergements et une cuisine collective.",
+                    "statut": "",
+                    "classification": "",
+                    "typePlace": [
+                        "Tiers-lieu culturel"
+                    ],
+                    "services": [
+                        "Cantinne"
+                    ]
+                },
+                "maj": {
+                    "date_MAJ": "2022-04-15",
                     "MAJ_Qui": "Jane Doe"
                 }
             }
