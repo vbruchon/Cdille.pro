@@ -84,6 +84,71 @@ label {
     display: none;
 }
 
+.typePlaceForm {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style pour le bouton de sélection */
+.select-selected {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10%;
+}
+
+/* Style pour les éléments de la liste déroulante */
+.select-items {
+    position: absolute;
+    background-color: #f1f1f1;
+    z-index: 99;
+    max-height: 200px;
+    overflow-y: scroll;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    top: 190px;
+}
+
+/* Style pour cacher les éléments de la liste déroulante */
+.select-hide {
+    display: none;
+}
+
+.option {
+    display: flex;
+    justify-content: space-between;
+    margin: 1% 0 0 2%;
+    font-size: 105%;
+    padding-right: 5%;
+}
+
+/* Style pour l'option de la checkbox survolée */
+.option:hover{
+    background-color: #ccc;
+}
+
+/* Style pour les labels des checkboxes */
+.select-items span {
+    display: block;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+/* Style pour le label de la checkbox cochée */
+.option input.checked {
+    background-color: #ddd;
+}
+
+
+
+
 
 @media screen and (max-width: 767px) {
     #content-div {
