@@ -82,19 +82,13 @@ function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
     form.innerHTML = `<div id="typePlaceForm">
                         <div class="select-selected">Quels types de tiers-lieux recherchez-vous ? + </div>
                         <div class="select-items select-hide"> 
-                            <div class="option">
-                                <span class="name-selected-items">Tous les types de Tiers-lieux</span>
-                                <input type="checkbox" name="typePlace[]" id="all" value="all" checked>
-                            </div>
+                            
                         </div>
                     </div>
                     <div id="servicesForm">
                         <div class="select-selected">Quels services recherchez-vous ? + </div>
                         <div class="select-items select-hide"> 
-                            <div class="option">
-                                <span class="name-selected-items">Tous les services</span>
-                                <input type="checkbox" name="typePlace[]" id="all" value="all" checked>
-                            </div>
+                            
                         </div>
                     </div>`;
 
@@ -110,12 +104,13 @@ function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
     for (let tiersLieux of features) {
         let typePlace = tiersLieux.properties.complement_info.typePlace;
         let services = tiersLieux.properties.complement_info.services;
-        console.log(services);
+
+
         for (let typePlaceName of typePlace) {
             if ((!typePlacePresent.includes(typePlaceName)) && typePlaceName !== "") {
                 typePlaceItem.innerHTML += `<div class="option">
                                                 <span class="name-selected-items">` + typePlaceName + `</span>
-                                                <input type="checkbox" id="` + typePlaceName + `" class="type-place-option" value="` + typePlaceName + `">
+                                                <input type="checkbox" id="` + typePlaceName + `" class="type-place-option" value="` + typePlaceName + `" checked>
                                             </div>`;
                 typePlacePresent.push(typePlaceName);
             }
@@ -125,7 +120,7 @@ function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
             if ((!servicePresent.includes(service)) && service !== "") {
                 servicesItem.innerHTML += `<div class="option">
                                                 <span class="name-selected-items">` + service + `</span>
-                                                <input type="checkbox" id="` + service + `" class="type-place-option" value="` + service + `">
+                                                <input type="checkbox" id="` + service + `" class="type-place-option" value="` + service + `" checked>
                                             </div>`;
                 servicePresent.push(service);
             }
@@ -136,7 +131,6 @@ function createFilterBar(form, markers, parsedData, markerClusterGroup, map) {
     options.forEach(option => {
         option.addEventListener("click", () => {
             let input = option.querySelector('input');
-            console.log(input);
             if (input.checked) {
                 input.removeAttribute('checked');
             } else {
@@ -218,9 +212,9 @@ function createListAndMapElement(markerClusterGroup, parsedData) {
     for (let tiersLieux of parsedData.features) {
         //content = object contains the tiers-lieux's content
         let content = {
-            "lat": tiersLieux.geometry.coordinates[1],
-            "long": tiersLieux.geometry.coordinates[0],
-            "name": tiersLieux.properties.identification.nom_long,
+            "lat": tiersLieux.geometry.coordinates[0],
+            "long": tiersLieux.geometry.coordinates[1],
+            "name": tiersLieux.properties.identification.nom_court,
             "adress": {
                 "street": tiersLieux.properties.coordonees.adresse,
                 "code": tiersLieux.properties.coordonees.code_postal,
@@ -244,7 +238,7 @@ function createListAndMapElement(markerClusterGroup, parsedData) {
         };
 
         //Create the content of Popup
-        let popupContent = `<div class="name">${content.name}</div>`;
+        let popupContent = `<div class="name-popup">${content.name}</div>`;
         //Create marker with lat and long; add custom icon and add popup
         let marker = L.marker([content.lat, content.long], { icon: iconCedille });
         marker.properties = { typePlace: content.typePlace, services: content.services }
@@ -305,10 +299,62 @@ function createElementCard(content, map, marker) {
     return card;
 }
 
+function checkScreenSize() {
+    if (window.innerWidth < 768 && !buttonsCreated) {
+        createListAndMapButtons();
+        buttonsCreated = true;
+    } else if (window.innerWidth >= 768 && buttonsCreated) {
+        removeListAndMapButtons();
+        buttonsCreated = false;
+    }
+}
+
+function removeListAndMapButtons() {
+    return document.getElementById("button").remove()
+}
+
+function createListAndMapButtons() {
+    const buttonDiv = createDomElement('div', "#button");
+
+    const buttonList = createDomElement('button', 'list-active');
+    const buttonMap = createDomElement('button', 'button-map');
+
+    buttonDiv.appendChild(buttonList);
+    buttonDiv.appendChild(buttonMap);
+    contentDiv.insertBefore(buttonDiv, contentDiv.firstChild);
+
+    buttonList.addEventListener("click", () => {
+        buttonList.classList.remove("button-list");
+        buttonList.classList.add("list-active");
+        list.style.display = "block";
+
+        mapDiv.style.display = "none";
+        buttonMap.classList.remove("map-active");
+        buttonMap.classList.add("button-map");
+    });
+
+    buttonMap.addEventListener("click", () => {
+        buttonMap.classList.remove("button-map");
+        buttonMap.classList.add("map-active");
+        mapDiv.style.display = "block";
+
+        list.style.display = "none";
+        buttonList.classList.remove("list-active");
+        buttonList.classList.add("button-list");
+    });
+}
+
+
+function fixMapLoadingBugs(map) {
+    setInterval(function () {
+        map.invalidateSize();
+    }, 100);
+}
+
 /*________CARD_ELEMENT_______*/
 function createNameElement(content) {
     let divName = createDomElement("div", "name");
-    let name = createDomElement("p", "", content.name, "");
+    let name = createDomElement("h2", "", content.name, "");
 
     divName.appendChild(name);
 
@@ -322,9 +368,10 @@ function createDescElement(content) {
 
     return desc;
 }
-function createAdressElement(content) {
+/* function createAdressElement(content) {
     let adress = createDomElement("div", "adress");
     let street = createDomElement("div", "street");
+    let codeAndCity = createDomElement("div", "code-city");
     let streetText = createDomElement("p", "", content.adress.street, "");
     let code = createDomElement("div", "code");
     let codeText = createDomElement("p", "", content.adress.code);
@@ -334,10 +381,35 @@ function createAdressElement(content) {
     street.appendChild(streetText);
     code.appendChild(codeText);
     city.appendChild(cityText);
+    codeAndCity.appendChild(code);
+    codeAndCity.appendChild(city)
 
     adress.appendChild(street);
-    adress.appendChild(code)
-    adress.appendChild(city)
+    adress.appendChild(codeAndCity)
+
+    return adress;
+} */
+
+function createAdressElement(content) {
+    let adress = createDomElement("div", "adress");
+    let streetText = createDomElement("p", "", content.adress.street + ",\u00A0\u00A0" + content.adress.code + "\u00A0\u00A0" + content.adress.city);
+
+    /* let street = createDomElement("div", "street");
+    let codeAndCity = createDomElement("div", "code-city");
+    let streetText = createDomElement("p", "", content.adress.street, "");
+    let code = createDomElement("div", "code");
+    let codeText = createDomElement("p", "", content.adress.code);
+    let city = createDomElement("div", "city");
+    let cityText = createDomElement("p", "", content.adress.city);
+
+    street.appendChild(streetText);
+    code.appendChild(codeText);
+    city.appendChild(cityText);
+    codeAndCity.appendChild(code);
+    codeAndCity.appendChild(city)
+ */
+    adress.appendChild(streetText);
+    //adress.appendChild(codeAndCity)
 
     return adress;
 }
@@ -359,7 +431,8 @@ function createEmailElement(content) {
 }
 function createWebSiteElement(content) {
     let webSite = createDomElement("div", "web-site");
-    let webSiteText = createDomElement("p", "", content.contact.webSite);
+    let webSiteText = createDomElement("a", "", "Site internet");
+    webSiteText.href = content.contact.webSite
 
     webSite.appendChild(webSiteText);
 
@@ -487,14 +560,14 @@ function toggleActiveCard(card) {
 
 /**_____________VARIABLE_____________ */
 //Création de map, icon, tileLayer
-let mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+let mapUrl = "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png";
 const map = L.map("map").setView([44.7241, 5.0864], 9);
 let iconCedille = L.icon({ iconUrl: "/wp-content/themes/hello-child/assets/images/markerC.png", iconSize: [65, 67] });
 L.tileLayer(mapUrl, { maxZoom: 19, attribution: "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>" }).addTo(map);
 
 let markers = [];
 let buttonsCreated = false;
-const jsonData = "/wp-content/themes/hello-child/assets/geojson/newData.json";
+const jsonData = "/wp-content/themes/hello-child/assets/geojson/annuaire_tiers-lieux.json";
 
 //DOM ELEMENT
 let list = document.getElementById("list");
@@ -509,10 +582,18 @@ fetch(jsonData)
 
         //Create a ClusterGroup to group markers
         let markerClusterGroup = L.markerClusterGroup();
+        
+        // appel initial pour vérifier la taille de l'écran
+        checkScreenSize();
 
         createFilterBar(form, markers, parsedData, markerClusterGroup, map);
         createListAndMapElement(markerClusterGroup, parsedData);
         cardEvent(document.querySelectorAll('.card'));
+
+        fixMapLoadingBugs(map)
+
+        // ajouter un écouteur pour vérifier la taille de l'écran lorsque l'utilisateur redimensionne la fenêtre
+        window.addEventListener("resize", checkScreenSize);
     })
     .catch(error => console.error(error));
 
