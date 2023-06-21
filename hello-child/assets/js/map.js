@@ -368,48 +368,12 @@ function createDescElement(content) {
 
     return desc;
 }
-/* function createAdressElement(content) {
-    let adress = createDomElement("div", "adress");
-    let street = createDomElement("div", "street");
-    let codeAndCity = createDomElement("div", "code-city");
-    let streetText = createDomElement("p", "", content.adress.street, "");
-    let code = createDomElement("div", "code");
-    let codeText = createDomElement("p", "", content.adress.code);
-    let city = createDomElement("div", "city");
-    let cityText = createDomElement("p", "", content.adress.city);
-
-    street.appendChild(streetText);
-    code.appendChild(codeText);
-    city.appendChild(cityText);
-    codeAndCity.appendChild(code);
-    codeAndCity.appendChild(city)
-
-    adress.appendChild(street);
-    adress.appendChild(codeAndCity)
-
-    return adress;
-} */
 
 function createAdressElement(content) {
     let adress = createDomElement("div", "adress");
     let streetText = createDomElement("p", "", content.adress.street + ",\u00A0\u00A0" + content.adress.code + "\u00A0\u00A0" + content.adress.city);
 
-    /* let street = createDomElement("div", "street");
-    let codeAndCity = createDomElement("div", "code-city");
-    let streetText = createDomElement("p", "", content.adress.street, "");
-    let code = createDomElement("div", "code");
-    let codeText = createDomElement("p", "", content.adress.code);
-    let city = createDomElement("div", "city");
-    let cityText = createDomElement("p", "", content.adress.city);
-
-    street.appendChild(streetText);
-    code.appendChild(codeText);
-    city.appendChild(cityText);
-    codeAndCity.appendChild(code);
-    codeAndCity.appendChild(city)
- */
     adress.appendChild(streetText);
-    //adress.appendChild(codeAndCity)
 
     return adress;
 }
@@ -596,14 +560,3 @@ fetch(jsonData)
         window.addEventListener("resize", checkScreenSize);
     })
     .catch(error => console.error(error));
-
-
-
-
-/**
- * Quand j'arrive sur la page dans les deux formulaires all est checked.
- * 
- * J'écoute les changements sur typeplaceform et servicesform
- * Si l'
- */
-
