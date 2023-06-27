@@ -1,0 +1,51 @@
+@media screen {
+    #last-posts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .latest-post {
+        width: 30%;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.75);
+    }
+
+
+    .latest-post-title {
+        text-align: center;
+        font-size: 130%;
+        color: #BA2253;
+    }
+
+    .latest-post-content {
+        font-size: 115%;
+        padding: 0 2%;
+    }
+
+
+
+}
+
+@media (max-width: 767px) {
+    .latest-post-title {
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+
+}
+
+@media (min-width: 1101px) {
+    .latest-post {
+        transition: transform .4s;
+    }
+
+    .latest-post:hover {
+        transform: scale(1.08);
+        cursor: pointer;
+    }
+
+}
